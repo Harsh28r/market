@@ -1,0 +1,470 @@
+{
+  "products": [
+    {
+      "slug": "oud-ruh",
+      "name": "Oud Ruh",
+      "hindi": "ऊद रूह",
+      "tagline": "Night resin for the last diya.",
+      "price": 279,
+      "mrp": 349,
+      "scent": "loban",
+      "family": "resin",
+      "sticks": "24 sticks",
+      "burn": "48 min",
+      "bestFor": [
+        "Night aarti",
+        "Guests"
+      ],
+      "notes": [
+        "Oud",
+        "Amber"
+      ],
+      "story": "Dark wood smoke. Light one when the house should feel expensive.",
+      "badge": "New lot",
+      "sku": "ARP-OUD-RUH",
+      "stock": 40,
+      "active": true
+    },
+    {
+      "slug": "nag-champa-aarti",
+      "name": "Nag Champa Aarti",
+      "hindi": "नाग चंपा",
+      "tagline": "The stick every Indian home already knows — just cleaner.",
+      "price": 149,
+      "mrp": 199,
+      "scent": "nagchampa",
+      "family": "sacred",
+      "sticks": "40 sticks",
+      "burn": "45 min",
+      "bestFor": [
+        "Daily aarti",
+        "Ganesh",
+        "Evening sandhya"
+      ],
+      "notes": [
+        "Champaca",
+        "Sandal",
+        "Halmaddi"
+      ],
+      "story": "Temple-grade nag champa without the cheap charcoal bite. Slow roll, thick cream smoke, the smell of a neighbourhood that still rings a bell at dusk.",
+      "badge": "House staple",
+      "sku": "ARP-1001",
+      "stock": 238,
+      "active": true
+    },
+    {
+      "slug": "mysore-chandan",
+      "name": "Mysore Chandan",
+      "hindi": "मैसूर चंदन",
+      "tagline": "Sandalwood that actually smells like wood, not perfume.",
+      "price": 249,
+      "mrp": 329,
+      "scent": "chandan",
+      "family": "woody",
+      "sticks": "30 sticks",
+      "burn": "50 min",
+      "bestFor": [
+        "Shiva Mondays",
+        "Meditation",
+        "New home"
+      ],
+      "notes": [
+        "Mysore sandal",
+        "Cedar",
+        "Warm milk"
+      ],
+      "story": "Ground sandal, not a lab clone. Cool on the inhale, golden on the cloth. Light it before you sit — the room decides to behave.",
+      "badge": "Premium",
+      "sku": "ARP-1002",
+      "stock": 86,
+      "active": true
+    },
+    {
+      "slug": "gulab-raj",
+      "name": "Gulab Raj",
+      "hindi": "गुलाब राज",
+      "tagline": "Rose for Fridays. Lakshmi notices.",
+      "price": 189,
+      "mrp": 249,
+      "scent": "rose",
+      "family": "floral",
+      "sticks": "35 sticks",
+      "burn": "40 min",
+      "bestFor": [
+        "Lakshmi pooja",
+        "Friday aarti",
+        "Weddings"
+      ],
+      "notes": [
+        "Damask rose",
+        "Honey",
+        "Soft musk"
+      ],
+      "story": "Petal-heavy, never syrupy. The kind of rose your nani would approve — festive without shouting.",
+      "badge": "Friday ritual",
+      "sku": "ARP-1003",
+      "stock": 120,
+      "active": true
+    },
+    {
+      "slug": "loban-resin",
+      "name": "Loban Resin",
+      "hindi": "लोहबान",
+      "tagline": "Church, dargah, mandir — the same holy smoke.",
+      "price": 219,
+      "mrp": 279,
+      "scent": "loban",
+      "family": "resin",
+      "sticks": "25 sticks + 8 cones",
+      "burn": "35 min",
+      "bestFor": [
+        "Cleansing",
+        "Navratri",
+        "After guests"
+      ],
+      "notes": [
+        "Benzoin",
+        "Frankincense",
+        "Warm amber"
+      ],
+      "story": "Resin-forward dhoop that clears a room the old way. One cone after a long day. Windows optional.",
+      "badge": "Cleansing",
+      "sku": "ARP-1004",
+      "stock": 18,
+      "active": true
+    },
+    {
+      "slug": "mogra-raat",
+      "name": "Mogra Raat",
+      "hindi": "मोगरा रात",
+      "tagline": "Night-blooming jasmine for the last aarti.",
+      "price": 179,
+      "mrp": 229,
+      "scent": "mogra",
+      "family": "floral",
+      "sticks": "35 sticks",
+      "burn": "42 min",
+      "bestFor": [
+        "Night aarti",
+        "Radha-Krishna",
+        "Summer evenings"
+      ],
+      "notes": [
+        "Mogra",
+        "Green stem",
+        "Dew"
+      ],
+      "story": "White flower, green snap, no grandma-soap. Burns like a garden after rain on a tin roof.",
+      "sku": "ARP-1005",
+      "stock": 64,
+      "active": true
+    },
+    {
+      "slug": "kapur-jyoti",
+      "name": "Kapur Jyoti",
+      "hindi": "कपूर ज्योति",
+      "tagline": "Camphor that flares clean — aarti, then silence.",
+      "price": 129,
+      "mrp": 169,
+      "scent": "camphor",
+      "family": "sacred",
+      "sticks": "20 tablets + 20 sticks",
+      "burn": "12 min tablet",
+      "bestFor": [
+        "Aarti close",
+        "Ganesh",
+        "Vastu"
+      ],
+      "notes": [
+        "Bhimseni camphor",
+        "Cool mint",
+        "White smoke"
+      ],
+      "story": "Bhimseni-grade kapur, not the supermarket disc. Lights fast, dies honest. Pair with nag champa and you’re done.",
+      "sku": "ARP-1006",
+      "stock": 200,
+      "active": true
+    },
+    {
+      "slug": "tulsi-vana",
+      "name": "Tulsi Vana",
+      "hindi": "तुलसी वन",
+      "tagline": "Herb-bright. For the courtyard and the cough season.",
+      "price": 159,
+      "mrp": 209,
+      "scent": "tulsi",
+      "family": "sacred",
+      "sticks": "40 sticks",
+      "burn": "38 min",
+      "bestFor": [
+        "Morning sandhya",
+        "Tulsi chaura",
+        "Monsoon"
+      ],
+      "notes": [
+        "Holy basil",
+        "Clove",
+        "Dry leaf"
+      ],
+      "story": "Green, medicinal, temple-courtyard. The stick you light when the house needs waking, not decorating.",
+      "sku": "ARP-1007",
+      "stock": 9,
+      "active": true
+    },
+    {
+      "slug": "kewra-ghar",
+      "name": "Kewra Ghar",
+      "hindi": "केवड़ा घर",
+      "tagline": "The North Indian wedding in a stick.",
+      "price": 199,
+      "mrp": 259,
+      "scent": "kewra",
+      "family": "floral",
+      "sticks": "30 sticks",
+      "burn": "44 min",
+      "bestFor": [
+        "Griha pravesh",
+        "Festive thali",
+        "Guests"
+      ],
+      "notes": [
+        "Kewra",
+        "Pandan",
+        "Sugarcane"
+      ],
+      "story": "That syrupy-green kewra from shamianas and rabri. Unapologetically desi. Light two when people are coming over.",
+      "sku": "ARP-1008",
+      "stock": 41,
+      "active": true
+    },
+    {
+      "slug": "ganesh-utsav-kit",
+      "name": "Ganesh Utsav Kit",
+      "hindi": "गणेश उत्सव",
+      "tagline": "Three days of visarjan-ready smoke. No last-minute kirana run.",
+      "price": 799,
+      "mrp": 1099,
+      "scent": "festival",
+      "family": "kit",
+      "sticks": "3 fragrances · 90 sticks",
+      "burn": "Full utsav",
+      "bestFor": [
+        "Ganesh Chaturthi",
+        "Gifting",
+        "New mandir"
+      ],
+      "notes": [
+        "Nag champa",
+        "Camphor",
+        "Rose"
+      ],
+      "story": "Nag champa for the daily aarti, kapur for the arti close, gulab for the last evening. Cotton wicks, a brass-look holder, and a small packet of sindoor. Ships in 24 hrs.",
+      "badge": "Limited · Ganesh",
+      "sku": "ARP-1009",
+      "stock": 32,
+      "active": true
+    },
+    {
+      "slug": "nitya-box",
+      "name": "Nitya Box",
+      "hindi": "नित्य बॉक्स",
+      "tagline": "A month of morning aarti, packed on the 1st.",
+      "price": 349,
+      "mrp": 449,
+      "scent": "nitya",
+      "family": "kit",
+      "sticks": "120 sticks / month",
+      "burn": "Daily",
+      "bestFor": [
+        "Subscription",
+        "Busy homes",
+        "Parents"
+      ],
+      "notes": [
+        "Rotating sacred blend",
+        "Chandan",
+        "Tulsi"
+      ],
+      "story": "We rotate temple blends so the house never goes nose-blind. Pause anytime. COD on the first box. Most people set it and forget it — that’s the point.",
+      "badge": "Subscribe",
+      "sku": "ARP-1010",
+      "stock": 400,
+      "active": true
+    }
+  ],
+  "orders": [
+    {
+      "customer": {
+        "name": "abhiLs2",
+        "phone": "9324983583",
+        "address": "dfewf"
+      },
+      "pay": "upi",
+      "items": [
+        {
+          "slug": "nag-champa-aarti",
+          "name": "Nag Champa Aarti",
+          "price": 149,
+          "qty": 2
+        }
+      ],
+      "subtotal": 298,
+      "ship": 79,
+      "total": 377,
+      "id": "ARP-2409",
+      "createdAt": "2026-08-29T13:19:43.605Z",
+      "status": "placed"
+    },
+    {
+      "id": "ARP-2408",
+      "createdAt": "2026-08-29T08:12:00.000Z",
+      "customer": {
+        "name": "Meera Kulkarni",
+        "phone": "9876543210",
+        "address": "12 Lane 4, Kothrud, Pune 411038"
+      },
+      "pay": "cod",
+      "items": [
+        {
+          "slug": "nag-champa-aarti",
+          "name": "Nag Champa Aarti",
+          "price": 149,
+          "qty": 3
+        }
+      ],
+      "subtotal": 447,
+      "ship": 79,
+      "total": 526,
+      "status": "packed"
+    },
+    {
+      "id": "ARP-2407",
+      "createdAt": "2026-08-28T14:40:00.000Z",
+      "customer": {
+        "name": "Arjun Shah",
+        "phone": "9811122233",
+        "address": "Koramangala 5th block, Bengaluru 560095"
+      },
+      "pay": "upi",
+      "items": [
+        {
+          "slug": "nitya-box",
+          "name": "Nitya Box",
+          "price": 349,
+          "qty": 1
+        }
+      ],
+      "subtotal": 349,
+      "ship": 79,
+      "total": 428,
+      "status": "shipped"
+    },
+    {
+      "id": "ARP-2406",
+      "createdAt": "2026-08-28T09:05:00.000Z",
+      "customer": {
+        "name": "Fatima Rizvi",
+        "phone": "9000011122",
+        "address": "Banjara Hills, Hyderabad 500034"
+      },
+      "pay": "cod",
+      "items": [
+        {
+          "slug": "loban-resin",
+          "name": "Loban Resin",
+          "price": 219,
+          "qty": 2
+        },
+        {
+          "slug": "kapur-jyoti",
+          "name": "Kapur Jyoti",
+          "price": 129,
+          "qty": 1
+        }
+      ],
+      "subtotal": 567,
+      "ship": 79,
+      "total": 646,
+      "status": "placed"
+    },
+    {
+      "id": "ARP-2405",
+      "createdAt": "2026-08-27T18:22:00.000Z",
+      "customer": {
+        "name": "Nandini Patel",
+        "phone": "9825098765",
+        "address": "Navrangpura, Ahmedabad 380009"
+      },
+      "pay": "upi",
+      "items": [
+        {
+          "slug": "ganesh-utsav-kit",
+          "name": "Ganesh Utsav Kit",
+          "price": 799,
+          "qty": 1
+        }
+      ],
+      "subtotal": 799,
+      "ship": 0,
+      "total": 799,
+      "status": "delivered"
+    },
+    {
+      "id": "ARP-2404",
+      "createdAt": "2026-08-26T11:10:00.000Z",
+      "customer": {
+        "name": "Rahul Iyer",
+        "phone": "9444012345",
+        "address": "Adyar, Chennai 600020"
+      },
+      "pay": "cod",
+      "items": [
+        {
+          "slug": "mysore-chandan",
+          "name": "Mysore Chandan",
+          "price": 249,
+          "qty": 2
+        },
+        {
+          "slug": "tulsi-vana",
+          "name": "Tulsi Vana",
+          "price": 159,
+          "qty": 1
+        }
+      ],
+      "subtotal": 657,
+      "ship": 79,
+      "total": 736,
+      "status": "shipped"
+    },
+    {
+      "id": "ARP-2403",
+      "createdAt": "2026-08-25T16:48:00.000Z",
+      "customer": {
+        "name": "Sana Qureshi",
+        "phone": "9810098100",
+        "address": "Hauz Khas, New Delhi 110016"
+      },
+      "pay": "upi",
+      "items": [
+        {
+          "slug": "gulab-raj",
+          "name": "Gulab Raj",
+          "price": 189,
+          "qty": 4
+        },
+        {
+          "slug": "kewra-ghar",
+          "name": "Kewra Ghar",
+          "price": 199,
+          "qty": 1
+        }
+      ],
+      "subtotal": 955,
+      "ship": 0,
+      "total": 955,
+      "status": "delivered"
+    }
+  ],
+  "seq": 2410
+}
