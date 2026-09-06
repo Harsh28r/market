@@ -26,6 +26,7 @@ export type Product = {
   notes: string[];
   story: string;
   badge?: string;
+  image?: string;
   sku: string;
   stock: number;
   active: boolean;
@@ -49,7 +50,7 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     slug: "nag-champa-aarti",
     name: "Nag Champa Aarti",
     hindi: "नाग चंपा",
-    tagline: "The stick every Indian home already knows — just cleaner.",
+    tagline: "ARPAN Signature Temple-Grade Nag Champa Masala Agarbatti.",
     price: 149,
     mrp: 199,
     scent: "nagchampa",
@@ -59,14 +60,15 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     bestFor: ["Daily aarti", "Ganesh", "Evening sandhya"],
     notes: ["Champaca", "Sandal", "Halmaddi"],
     story:
-      "Temple-grade nag champa without the cheap charcoal bite. Slow roll, thick cream smoke, the smell of a neighbourhood that still rings a bell at dusk.",
+      "ARPAN temple-grade nag champa without cheap charcoal bite. Hand-rolled with pure champaca flower extract, golden halmaddi resin, and ground mysore sandalwood.",
     badge: "House staple",
+    image: "/nag_champa_box.jpg",
   },
   {
     slug: "mysore-chandan",
     name: "Mysore Chandan",
     hindi: "मैसूर चंदन",
-    tagline: "Sandalwood that actually smells like wood, not perfume.",
+    tagline: "100% Pure Sandalwood Masala Agarbatti with Zero Synthetic Perfume.",
     price: 249,
     mrp: 329,
     scent: "chandan",
@@ -76,14 +78,15 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     bestFor: ["Shiva Mondays", "Meditation", "New home"],
     notes: ["Mysore sandal", "Cedar", "Warm milk"],
     story:
-      "Ground sandal, not a lab clone. Cool on the inhale, golden on the cloth. Light it before you sit — the room decides to behave.",
+      "ARPAN Mysore Chandan features pure ground sandalwood dust and cold-pressed sandal essential oil. Calm, golden, and deeply meditative.",
     badge: "Premium",
+    image: "/mysore_chandan_box.jpg",
   },
   {
     slug: "gulab-raj",
     name: "Gulab Raj",
     hindi: "गुलाब राज",
-    tagline: "Rose for Fridays. Lakshmi notices.",
+    tagline: "Kannauj Damask Rose Agarbatti for Friday Lakshmi Worship.",
     price: 189,
     mrp: 249,
     scent: "rose",
@@ -93,14 +96,15 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     bestFor: ["Lakshmi pooja", "Friday aarti", "Weddings"],
     notes: ["Damask rose", "Honey", "Soft musk"],
     story:
-      "Petal-heavy, never syrupy. The kind of rose your nani would approve — festive without shouting.",
+      "Crafted with natural Damask rose attar distilled in traditional copper degs of Kannauj. ARPAN Gulab Raj brings divine flower fragrance into your pooja room.",
     badge: "Friday ritual",
+    image: "/vedasakti_rose.jpg",
   },
   {
     slug: "loban-resin",
-    name: "Loban Resin",
-    hindi: "लोहबान",
-    tagline: "Church, dargah, mandir — the same holy smoke.",
+    name: "Loban Resin Dhoop",
+    hindi: "लोहबान धुप",
+    tagline: "Sacred Benzoin & Frankincense Resin for Energy Cleansing.",
     price: 219,
     mrp: 279,
     scent: "loban",
@@ -110,14 +114,15 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     bestFor: ["Cleansing", "Navratri", "After guests"],
     notes: ["Benzoin", "Frankincense", "Warm amber"],
     story:
-      "Resin-forward dhoop that clears a room the old way. One cone after a long day. Windows optional.",
+      "ARPAN Loban Resin is made from pure tree resins. Creates rich purifying temple smoke that eliminates negative energy and purifies home air.",
     badge: "Cleansing",
+    image: "/vedasakti_craft.jpg",
   },
   {
     slug: "mogra-raat",
     name: "Mogra Raat",
     hindi: "मोगरा रात",
-    tagline: "Night-blooming jasmine for the last aarti.",
+    tagline: "Night-Blooming Jasmine Agarbatti for Serene Evenings.",
     price: 179,
     mrp: 229,
     scent: "mogra",
@@ -127,13 +132,14 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     bestFor: ["Night aarti", "Radha-Krishna", "Summer evenings"],
     notes: ["Mogra", "Green stem", "Dew"],
     story:
-      "White flower, green snap, no grandma-soap. Burns like a garden after rain on a tin roof.",
+      "ARPAN Mogra Raat captures fresh white jasmine blossoms. Rolled in natural bamboo stick with botanical binder.",
+    image: "/vedasakti_rose.jpg",
   },
   {
     slug: "kapur-jyoti",
     name: "Kapur Jyoti",
     hindi: "कपूर ज्योति",
-    tagline: "Camphor that flares clean — aarti, then silence.",
+    tagline: "Pure Bhimseni Camphor Agarbatti for Aarti Finish.",
     price: 129,
     mrp: 169,
     scent: "camphor",
@@ -143,13 +149,14 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     bestFor: ["Aarti close", "Ganesh", "Vastu"],
     notes: ["Bhimseni camphor", "Cool mint", "White smoke"],
     story:
-      "Bhimseni-grade kapur, not the supermarket disc. Lights fast, dies honest. Pair with nag champa and you’re done.",
+      "ARPAN Kapur Jyoti uses 100% organic Bhimseni camphor that burns spotless and leaves a crisp, sacred aura in your home.",
+    image: "/vedasakti_hero.jpg",
   },
   {
     slug: "tulsi-vana",
     name: "Tulsi Vana",
     hindi: "तुलसी वन",
-    tagline: "Herb-bright. For the courtyard and the cough season.",
+    tagline: "Sacred Holy Basil & Herb Agarbatti for Courtyard Aarti.",
     price: 159,
     mrp: 209,
     scent: "tulsi",
@@ -159,13 +166,14 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     bestFor: ["Morning sandhya", "Tulsi chaura", "Monsoon"],
     notes: ["Holy basil", "Clove", "Dry leaf"],
     story:
-      "Green, medicinal, temple-courtyard. The stick you light when the house needs waking, not decorating.",
+      "ARPAN Tulsi Vana combines crushed holy basil leaves with herbal spice oils for an invigorating, germ-cleansing morning ritual.",
+    image: "/vedasakti_chandan.jpg",
   },
   {
     slug: "kewra-ghar",
     name: "Kewra Ghar",
     hindi: "केवड़ा घर",
-    tagline: "The North Indian wedding in a stick.",
+    tagline: "Royal Pandanus Flower Agarbatti for Festive House Warming.",
     price: 199,
     mrp: 259,
     scent: "kewra",
@@ -175,13 +183,14 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     bestFor: ["Griha pravesh", "Festive thali", "Guests"],
     notes: ["Kewra", "Pandan", "Sugarcane"],
     story:
-      "That syrupy-green kewra from shamianas and rabri. Unapologetically desi. Light two when people are coming over.",
+      "Extracted from wild Ganjam Kewra flowers, ARPAN Kewra Ghar fills the room with festive sweetness for special guests.",
+    image: "/vedasakti_rose.jpg",
   },
   {
     slug: "ganesh-utsav-kit",
     name: "Ganesh Utsav Kit",
-    hindi: "गणेश उत्सव",
-    tagline: "Three days of visarjan-ready smoke. No last-minute kirana run.",
+    hindi: "गणेश उत्सव किट",
+    tagline: "Complete 10-Day Festival Agarbatti & Brass Holder Set.",
     price: 799,
     mrp: 1099,
     scent: "festival",
@@ -191,14 +200,15 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     bestFor: ["Ganesh Chaturthi", "Gifting", "New mandir"],
     notes: ["Nag champa", "Camphor", "Rose"],
     story:
-      "Nag champa for the daily aarti, kapur for the arti close, gulab for the last evening. Cotton wicks, a brass-look holder, and a small packet of sindoor. Ships in 24 hrs.",
+      "The ARPAN Ganesh Utsav Kit comes in a luxury gold embossed box. Includes Nag Champa, Kapur Jyoti, Gulab Raj, solid brass incense burner, and pure kumkum.",
     badge: "Limited · Ganesh",
+    image: "/vedasakti_hero.jpg",
   },
   {
     slug: "nitya-box",
     name: "Nitya Box",
     hindi: "नित्य बॉक्स",
-    tagline: "A month of morning aarti, packed on the 1st.",
+    tagline: "Monthly ARPAN Organic Agarbatti Subscription Pack.",
     price: 349,
     mrp: 449,
     scent: "nitya",
@@ -208,8 +218,9 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     bestFor: ["Subscription", "Busy homes", "Parents"],
     notes: ["Rotating sacred blend", "Chandan", "Tulsi"],
     story:
-      "We rotate temple blends so the house never goes nose-blind. Pause anytime. COD on the first box. Most people set it and forget it — that’s the point.",
+      "Receive 4 distinct ARPAN hand-rolled incense packs delivered to your doorstep every month with free brass holder samples.",
     badge: "Subscribe",
+    image: "/mysore_chandan_box.jpg",
   },
 ];
 

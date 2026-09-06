@@ -36,7 +36,13 @@ export default async function ProductPage({ params }: Props) {
         ← Shop
       </Link>
       <div className="mt-6 grid gap-10 md:grid-cols-2">
-        <ProductArt scent={p.scent} className="min-h-[480px] w-full" />
+        <ProductArt
+          scent={p.scent}
+          image={p.image}
+          productName={p.name}
+          hindiName={p.hindi}
+          className="min-h-[480px] w-full rounded border border-gold/30 shadow-md"
+        />
         <div>
           <p className="font-deva text-ember">{p.hindi}</p>
           <h1 className="font-display mt-1 text-5xl leading-tight">{p.name}</h1>

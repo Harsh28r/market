@@ -23,11 +23,11 @@ const deva = Tiro_Devanagari_Hindi({
 
 export const metadata: Metadata = {
   title: {
-    default: "Arpan — Handmade agarbatti for daily pooja",
-    template: "%s · Arpan",
+    default: "ARPAN (अर्पण) — Pure Organic Temple Agarbatti & Sacred Aromas",
+    template: "%s · ARPAN",
   },
   description:
-    "Temple-grade agarbatti, dhoop, and pooja kits from Nashik. Shop by ritual. COD across India. Ganesh Utsav kits shipping now.",
+    "100% Charcoal-Free Organic Agarbatti, Dhoop, and Pooja Kits from Nashik & Kannauj. Hand-rolled with natural wood powders, halmaddi resin, and pure essential oils. COD across India.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

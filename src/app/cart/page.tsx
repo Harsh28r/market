@@ -32,7 +32,13 @@ export default function CartPage() {
                 key={product.slug}
                 className="flex gap-4 border-b border-ink/10 pb-6"
               >
-                <ProductArt scent={product.scent} className="h-28 w-20 shrink-0" />
+                <ProductArt
+                  image={product.image}
+                  productName={product.name}
+                  hindiName={product.hindi}
+                  compact={true}
+                  className="h-24 w-20 shrink-0 shadow-sm"
+                />
                 <div className="flex flex-1 flex-col">
                   <div className="flex justify-between gap-4">
                     <Link href={`/product/${product.slug}`} className="font-display text-2xl">

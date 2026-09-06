@@ -23,7 +23,8 @@
       "badge": "New lot",
       "sku": "ARP-OUD-RUH",
       "stock": 40,
-      "active": true
+      "active": true,
+      "image": "/vedasakti_craft.jpg"
     },
     {
       "slug": "nag-champa-aarti",
@@ -50,7 +51,8 @@
       "badge": "House staple",
       "sku": "ARP-1001",
       "stock": 238,
-      "active": true
+      "active": true,
+      "image": "/nag_champa_box.jpg"
     },
     {
       "slug": "mysore-chandan",
@@ -77,7 +79,8 @@
       "badge": "Premium",
       "sku": "ARP-1002",
       "stock": 86,
-      "active": true
+      "active": true,
+      "image": "/mysore_chandan_box.jpg"
     },
     {
       "slug": "gulab-raj",
@@ -104,7 +107,8 @@
       "badge": "Friday ritual",
       "sku": "ARP-1003",
       "stock": 120,
-      "active": true
+      "active": true,
+      "image": "/vedasakti_rose.jpg"
     },
     {
       "slug": "loban-resin",
@@ -131,7 +135,8 @@
       "badge": "Cleansing",
       "sku": "ARP-1004",
       "stock": 18,
-      "active": true
+      "active": true,
+      "image": "/vedasakti_craft.jpg"
     },
     {
       "slug": "mogra-raat",
@@ -157,7 +162,8 @@
       "story": "White flower, green snap, no grandma-soap. Burns like a garden after rain on a tin roof.",
       "sku": "ARP-1005",
       "stock": 64,
-      "active": true
+      "active": true,
+      "image": "/vedasakti_rose.jpg"
     },
     {
       "slug": "kapur-jyoti",
@@ -183,7 +189,8 @@
       "story": "Bhimseni-grade kapur, not the supermarket disc. Lights fast, dies honest. Pair with nag champa and you’re done.",
       "sku": "ARP-1006",
       "stock": 200,
-      "active": true
+      "active": true,
+      "image": "/vedasakti_hero.jpg"
     },
     {
       "slug": "tulsi-vana",
@@ -209,7 +216,8 @@
       "story": "Green, medicinal, temple-courtyard. The stick you light when the house needs waking, not decorating.",
       "sku": "ARP-1007",
       "stock": 9,
-      "active": true
+      "active": true,
+      "image": "/vedasakti_chandan.jpg"
     },
     {
       "slug": "kewra-ghar",
@@ -235,7 +243,8 @@
       "story": "That syrupy-green kewra from shamianas and rabri. Unapologetically desi. Light two when people are coming over.",
       "sku": "ARP-1008",
       "stock": 41,
-      "active": true
+      "active": true,
+      "image": "/vedasakti_rose.jpg"
     },
     {
       "slug": "ganesh-utsav-kit",
@@ -262,7 +271,8 @@
       "badge": "Limited · Ganesh",
       "sku": "ARP-1009",
       "stock": 32,
-      "active": true
+      "active": true,
+      "image": "/vedasakti_hero.jpg"
     },
     {
       "slug": "nitya-box",
@@ -289,7 +299,8 @@
       "badge": "Subscribe",
       "sku": "ARP-1010",
       "stock": 400,
-      "active": true
+      "active": true,
+      "image": "/mysore_chandan_box.jpg"
     }
   ],
   "orders": [
