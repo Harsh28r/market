@@ -24,20 +24,20 @@ export function RitualFinder() {
         <p className="text-[11px] tracking-[0.28em] uppercase text-gold">
           Creative sell · start from the pooja, not the SKU
         </p>
-        <h2 className="font-display mt-3 max-w-2xl text-4xl leading-tight md:text-5xl">
+        <h2 className="font-display mt-3 max-w-2xl text-3xl leading-tight md:text-5xl">
           What are you lighting for?
         </h2>
         <p className="mt-3 max-w-xl text-ivory/60">
           Pick the ritual. We’ll put the right smoke in the tray — no 40-pack
           guesswork at the kirana.
         </p>
-        <div className="mt-8 flex flex-wrap gap-2">
+        <div className="-mx-5 mt-8 flex gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
           {rituals.map((r) => (
             <button
               key={r.id}
               type="button"
               onClick={() => setId(r.id)}
-              className={`border px-4 py-2 text-[12px] tracking-[0.12em] uppercase transition ${
+              className={`shrink-0 border px-4 py-2.5 text-[12px] tracking-[0.12em] uppercase transition ${
                 id === r.id
                   ? "border-saffron bg-saffron text-ink"
                   : "border-ivory/20 text-ivory/80 hover:border-gold"
@@ -73,9 +73,9 @@ export function RitualFinder() {
                     compact
                     className="h-32 w-24 shrink-0"
                   />
-                  <div className="min-w-0 self-center">
+                  <div className="min-w-0 flex-1 self-center">
                     <p className="font-deva text-xs text-gold">{p.hindi}</p>
-                    <p className="font-display text-xl leading-tight">{p.name}</p>
+                    <p className="font-display text-lg leading-tight sm:text-xl">{p.name}</p>
                     <p className="mt-1 truncate text-sm text-ivory/50">{p.tagline}</p>
                     <p className="mt-2 text-sm text-gold">{inr(p.price)}</p>
                   </div>

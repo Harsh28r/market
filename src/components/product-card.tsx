@@ -65,8 +65,8 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
         )}
 
-        <div className="mt-auto flex items-center justify-between gap-2 pt-4 border-t border-ink/10">
-          <div>
+        <div className="mt-auto flex flex-wrap items-end justify-between gap-3 pt-4 border-t border-ink/10">
+          <div className="min-w-0">
             <span className="text-lg font-bold text-ink">{inr(product.price)}</span>
             {product.mrp > product.price && (
               <span className="ml-2 text-xs text-mist line-through">{inr(product.mrp)}</span>
@@ -80,7 +80,7 @@ export function ProductCard({ product }: { product: Product }) {
             slug={product.slug}
             disabled={out}
             label={out ? "Gone" : "ADD"}
-            className="bg-ink px-4 py-2 text-[11px] font-bold tracking-[0.16em] uppercase text-ivory hover:bg-saffron hover:text-ink transition rounded-sm disabled:cursor-not-allowed disabled:opacity-40"
+            className="shrink-0 bg-ink px-4 py-2.5 text-[11px] font-bold tracking-[0.16em] uppercase text-ivory hover:bg-saffron hover:text-ink transition rounded-sm disabled:cursor-not-allowed disabled:opacity-40"
           />
         </div>
       </div>

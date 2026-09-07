@@ -74,10 +74,10 @@ export function CheckoutForm() {
   }
 
   return (
-    <main className="mx-auto grid w-full max-w-5xl gap-12 px-5 py-14 md:grid-cols-2">
+    <main className="mx-auto grid w-full max-w-5xl gap-12 px-4 py-10 sm:px-5 sm:py-14 md:grid-cols-2">
       <form key={user?.id ?? "in"} onSubmit={onSubmit} className="space-y-5">
-        <h1 className="font-display text-5xl">Where should it land?</h1>
-        <p className="text-sm text-mist">
+        <h1 className="font-display text-4xl sm:text-5xl">Where should it land?</h1>
+        <p className="break-words text-sm text-mist">
           Signed in as {user?.email}. Address from your account — edit if the diya moved.
         </p>
         <label className="block text-sm">
@@ -114,7 +114,7 @@ export function CheckoutForm() {
         </label>
         <fieldset>
           <legend className="text-sm">Pay</legend>
-          <div className="mt-2 flex gap-3">
+          <div className="mt-2 flex flex-col gap-3 sm:flex-row">
             {(
               [
                 ["cod", "Cash on delivery"],

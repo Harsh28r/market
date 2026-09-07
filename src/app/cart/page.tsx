@@ -14,8 +14,8 @@ export default function CartPage() {
   const total = subtotal + ship;
 
   return (
-    <main className="mx-auto w-full max-w-5xl px-5 py-14">
-      <h1 className="font-display text-5xl">Aarti tray</h1>
+    <main className="mx-auto w-full max-w-5xl px-4 py-10 sm:px-5 sm:py-14">
+      <h1 className="font-display text-4xl sm:text-5xl">Aarti tray</h1>
       <p className="mt-2 text-mist">{count} item{count === 1 ? "" : "s"}</p>
       {items.length === 0 ? (
         <div className="mt-12 border border-ink/10 bg-ivory p-10 text-center">
@@ -43,12 +43,12 @@ export default function CartPage() {
                   compact
                   className="h-28 w-24 shrink-0 shadow-sm"
                 />
-                <div className="flex flex-1 flex-col">
-                  <div className="flex justify-between gap-4">
-                    <Link href={`/product/${product.slug}`} className="font-display text-2xl">
+                <div className="flex min-w-0 flex-1 flex-col">
+                  <div className="flex justify-between gap-3">
+                    <Link href={`/product/${product.slug}`} className="font-display min-w-0 text-xl leading-tight sm:text-2xl">
                       {product.name}
                     </Link>
-                    <p>{inr(product.price * qty)}</p>
+                    <p className="shrink-0">{inr(product.price * qty)}</p>
                   </div>
                   <p className="text-sm text-mist">{product.sticks}</p>
                   <div className="mt-auto flex items-center gap-3 pt-3">

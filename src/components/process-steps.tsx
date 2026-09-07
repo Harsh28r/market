@@ -12,7 +12,7 @@ export function ProcessSteps() {
         <p className="text-[11px] tracking-[0.28em] uppercase text-gold font-bold">
           Our process
         </p>
-        <h2 className="font-display mt-2 max-w-2xl text-4xl leading-tight">
+        <h2 className="font-display mt-2 max-w-2xl text-3xl leading-tight md:text-4xl">
           Slow, mindful, four steps — not a machine dip.
         </h2>
         <ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">

@@ -53,7 +53,7 @@ export default async function Home() {
         <JsonLd key={i} data={block} />
       ))}
       {/* ARPAN Hero Section */}
-      <section className="grain relative min-h-[92vh] overflow-hidden bg-ink text-ivory">
+      <section className="grain relative min-h-[78svh] overflow-hidden bg-ink text-ivory md:min-h-[92vh]">
         <Image
           src="/vedasakti_hero.jpg"
           alt="Buy charcoal-free agarbatti online — ARPAN temple incense from Nashik"
@@ -63,28 +63,30 @@ export default async function Home() {
           className="object-cover opacity-55 scale-105"
         />
         <div className="absolute inset-0 bg-linear-to-b from-ink/60 via-ink/75 to-ink" />
-        <div className="relative z-10 mx-auto flex min-h-[92vh] max-w-6xl flex-col justify-end px-5 pb-20 pt-28 md:justify-center md:pb-24">
-          <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-ink/70 px-3.5 py-1 text-xs text-gold backdrop-blur-md max-w-max">
-            <span className="font-deva font-bold">अर्पण · 100% 🌿 Organically Hand-Rolled</span>
+        <div className="relative z-10 mx-auto flex min-h-[78svh] max-w-6xl flex-col justify-end px-4 pb-16 pt-20 sm:px-5 md:min-h-[92vh] md:justify-center md:pb-24 md:pt-28">
+          <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-gold/40 bg-ink/70 px-3 py-1 text-[11px] text-gold backdrop-blur-md sm:px-3.5 sm:text-xs">
+            <span className="font-deva font-bold leading-snug">
+              अर्पण · 100% 🌿 Organically Hand-Rolled
+            </span>
           </div>
-          <h1 className="font-display mt-4 max-w-3xl text-5xl leading-[0.95] md:text-7xl">
+          <h1 className="font-display mt-4 max-w-3xl text-[2.35rem] leading-[0.95] sm:text-5xl md:text-7xl">
             Buy charcoal-free
             <br />
             agarbatti online.
           </h1>
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-ivory/80 md:text-lg">
+          <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-ivory/80 sm:mt-6 sm:text-base md:text-lg">
             ARPAN temple incense from Nashik — hand-rolled Nag Champa, Mysore Chandan, Gulab Raj rose, and loban dhoop. Zero charcoal, 40–50 min burn, COD across India.
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4">
             <Link
               href="/shop"
-              className="bg-linear-to-r from-saffron to-gold px-8 py-3.5 text-[12px] font-bold tracking-[0.2em] uppercase text-ink shadow-lg hover:brightness-110 transition"
+              className="bg-linear-to-r from-saffron to-gold px-8 py-3.5 text-center text-[12px] font-bold tracking-[0.2em] uppercase text-ink shadow-lg hover:brightness-110 transition"
             >
               Shop Agarbatti
             </Link>
             <Link
               href="/rituals"
-              className="border border-gold/50 bg-ink/40 backdrop-blur-md px-8 py-3.5 text-[12px] tracking-[0.2em] uppercase text-ivory hover:border-gold hover:text-gold transition"
+              className="border border-gold/50 bg-ink/40 backdrop-blur-md px-8 py-3.5 text-center text-[12px] tracking-[0.2em] uppercase text-ivory hover:border-gold hover:text-gold transition"
             >
               Shop by Ritual (पूजा)
             </Link>
@@ -118,7 +120,7 @@ export default async function Home() {
       <FestivalBanner />
 
       <section className="mx-auto max-w-6xl px-5 py-16">
-        <h2 className="font-display text-4xl">Charcoal-free agarbatti for daily pooja</h2>
+          <h2 className="font-display text-3xl sm:text-4xl">Charcoal-free agarbatti for daily pooja</h2>
         <p className="mt-4 max-w-3xl text-mist leading-relaxed">
           ARPAN is a Nashik agarbatti brand for people who want to buy agarbatti online without supermarket charcoal paste. Every stick is hand-rolled masala — sandalwood, dried flowers, and halmaddi — then packed the same day we dispatch. Shop Nag Champa, Mysore Chandan, rose, mogra, tulsi, kewra, and loban dhoop. COD and UPI across India.
         </p>
@@ -137,7 +139,7 @@ export default async function Home() {
             <p className="text-[11px] tracking-[0.28em] uppercase text-ember font-bold">
               Devotees’ favourite
             </p>
-            <h2 className="font-display mt-2 text-4xl md:text-5xl">
+          <h2 className="font-display mt-2 text-3xl sm:text-4xl md:text-5xl">
               Best-sellers
             </h2>
             <p className="mt-2 text-sm text-mist">Hand-rolled purity, crafted for aarti.</p>
@@ -185,7 +187,7 @@ export default async function Home() {
               className="object-cover"
             />
           </div>
-          <div id="story" className="flex flex-col justify-center px-8 py-16 md:px-14">
+          <div id="story" className="flex flex-col justify-center px-5 py-14 sm:px-8 md:px-14 md:py-16">
             <p className="text-[11px] tracking-[0.28em] uppercase text-gold font-bold">
               The ARPAN Difference
             </p>
@@ -206,7 +208,7 @@ export default async function Home() {
 
       {/* Featured Sets */}
       <section className="mx-auto grid max-w-6xl gap-8 px-5 py-20 md:grid-cols-2">
-        <article className="grain relative overflow-hidden bg-ink p-8 text-ivory md:min-h-[420px] rounded border border-gold/30">
+        <article className="grain relative overflow-hidden bg-ink p-5 text-ivory sm:p-8 md:min-h-[420px] rounded border border-gold/30">
           <Image
             src={kit.image || `/products/${kit.slug}.jpg`}
             alt={kit.name}
@@ -241,7 +243,7 @@ export default async function Home() {
           </div>
           </div>
         </article>
-        <article className="relative overflow-hidden border border-ink/15 bg-ivory p-8 md:min-h-[420px] rounded">
+        <article className="relative overflow-hidden border border-ink/15 bg-ivory p-5 sm:p-8 md:min-h-[420px] rounded">
           <Image
             src={box.image || `/products/${box.slug}.jpg`}
             alt={box.name}
@@ -281,7 +283,7 @@ export default async function Home() {
         <p className="text-[11px] tracking-[0.28em] uppercase text-ember font-bold">
           FAQ
         </p>
-        <h2 className="font-display mt-2 text-4xl">Agarbatti online — common questions</h2>
+        <h2 className="font-display mt-2 text-3xl sm:text-4xl">Agarbatti online — common questions</h2>
         <dl className="mt-10 grid gap-6 md:grid-cols-2">
           {landingFaqs.map((f) => (
             <div key={f.q} className="border border-ink/10 bg-ivory p-6">
@@ -298,7 +300,7 @@ export default async function Home() {
           <p className="text-[11px] tracking-[0.28em] uppercase text-ember font-bold">
             Customer Testimonials
           </p>
-          <h2 className="font-display mt-2 text-4xl">From Homes Across India</h2>
+          <h2 className="font-display mt-2 text-3xl sm:text-4xl">From Homes Across India</h2>
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             {reviews.map((r) => (
               <blockquote
@@ -319,19 +321,19 @@ export default async function Home() {
       {/* CTA Footer Section */}
       <section className="bg-ink px-5 py-20 text-center text-ivory border-t border-gold/30">
         <p className="font-deva text-gold text-lg">अर्पण · पवित्र धूप</p>
-        <h2 className="font-display mx-auto mt-3 max-w-xl text-4xl leading-tight">
+        <h2 className="font-display mx-auto mt-3 max-w-xl text-3xl leading-tight sm:text-4xl">
           Buy agarbatti online — same-day Nashik pack
         </h2>
-        <div className="mt-8 flex justify-center gap-4">
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
           <Link
             href="/shop"
-            className="bg-saffron px-8 py-3.5 text-[12px] font-bold tracking-[0.18em] uppercase text-ink hover:bg-gold transition"
+            className="bg-saffron px-8 py-3.5 text-center text-[12px] font-bold tracking-[0.18em] uppercase text-ink hover:bg-gold transition"
           >
             Explore ARPAN Catalog
           </Link>
           <Link
             href="/rituals"
-            className="border border-ivory/30 px-8 py-3.5 text-[12px] tracking-[0.18em] uppercase hover:border-gold hover:text-gold transition"
+            className="border border-ivory/30 px-8 py-3.5 text-center text-[12px] tracking-[0.18em] uppercase hover:border-gold hover:text-gold transition"
           >
             Select Your Pooja
           </Link>

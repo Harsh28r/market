@@ -66,8 +66,8 @@ export function AccountHome({
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="text-[11px] tracking-[0.28em] uppercase text-ember">Account</p>
-          <h1 className="font-display mt-2 text-5xl">Namaste, {user.name.split(" ")[0]}</h1>
-          <p className="mt-2 text-sm text-mist">
+          <h1 className="font-display mt-2 text-4xl sm:text-5xl">Namaste, {user.name.split(" ")[0]}</h1>
+          <p className="mt-2 break-words text-sm text-mist">
             {user.email}
             {user.emailVerified ? " · verified" : ""}
           </p>

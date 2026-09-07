@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Outfit, Tiro_Devanagari_Hindi } from "next/font/google";
 import { JsonLd } from "@/components/json-ld";
 import { Providers } from "@/components/providers";
@@ -24,6 +24,12 @@ const deva = Tiro_Devanagari_Hindi({
   subsets: ["latin", "devanagari"],
   weight: "400",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getSeo();

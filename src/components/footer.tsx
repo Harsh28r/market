@@ -56,7 +56,7 @@ export function Footer() {
               </a>
             </li>
             <li>
-              <a href={`mailto:${EMAIL}`} className="hover:text-gold transition">
+              <a href={`mailto:${EMAIL}`} className="break-all hover:text-gold transition">
                 ✉ {EMAIL}
               </a>
             </li>

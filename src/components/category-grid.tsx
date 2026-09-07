@@ -34,7 +34,7 @@ export function CategoryGrid() {
       <p className="text-[11px] tracking-[0.28em] uppercase text-ember font-bold">
         Shop by category
       </p>
-      <h2 className="font-display mt-2 text-4xl md:text-5xl">Start with the ritual</h2>
+        <h2 className="font-display mt-2 text-3xl md:text-5xl">Start with the ritual</h2>
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {cats.map((c) => (
           <Link

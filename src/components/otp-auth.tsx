@@ -112,9 +112,9 @@ export function OtpAuth({ mode, next }: { mode: Mode; next: string }) {
         : "Sign in";
 
   return (
-    <main className="mx-auto w-full max-w-md px-5 py-16">
+    <main className="mx-auto w-full max-w-md px-4 py-12 sm:px-5 sm:py-16">
       <p className="text-[11px] tracking-[0.28em] uppercase text-ember">Account</p>
-      <h1 className="font-display mt-2 text-5xl">{title}</h1>
+      <h1 className="font-display mt-2 text-4xl sm:text-5xl">{title}</h1>
       <p className="mt-3 text-sm text-mist">
         6-digit code to your email. No password. Orders only after the mail checks out.
       </p>

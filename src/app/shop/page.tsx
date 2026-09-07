@@ -30,11 +30,11 @@ export default async function ShopPage({
   const initial = famFrom(fam);
   const catalog = await listProducts({ activeOnly: true });
   return (
-    <main className="mx-auto w-full max-w-6xl px-5 py-14">
+    <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-5 sm:py-14">
       <p className="text-[11px] tracking-[0.28em] uppercase text-ember">
         Catalog
       </p>
-      <h1 className="font-display mt-2 text-5xl">
+      <h1 className="font-display mt-2 text-4xl sm:text-5xl">
         {initial === "all"
           ? "All the smoke"
           : families.find((f) => f.id === initial)?.label}

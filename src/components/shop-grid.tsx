@@ -18,13 +18,13 @@ export function ShopGrid({ initial }: { initial?: Family | "all" }) {
 
   return (
     <>
-      <div className="flex flex-wrap gap-2">
+      <div className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
         {families.map((f) => (
           <button
             key={f.id}
             type="button"
             onClick={() => setFam(f.id)}
-            className={`px-4 py-2 text-[12px] tracking-[0.14em] uppercase ${
+            className={`shrink-0 px-4 py-2.5 text-[12px] tracking-[0.14em] uppercase ${
               fam === f.id
                 ? "bg-ink text-ivory"
                 : "border border-ink/15 hover:border-saffron"

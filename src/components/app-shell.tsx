@@ -10,7 +10,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const path = usePathname();
   if (path.startsWith("/admin")) return <>{children}</>;
   return (
-    <div className="flex min-h-full flex-1 flex-col pb-20">
+    <div className="flex min-h-full flex-1 flex-col pb-24 md:pb-20">
       <Header />
       {children}
       <Footer />

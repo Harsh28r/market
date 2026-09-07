@@ -27,7 +27,7 @@ export function AddToCart({
   }
 
   return (
-    <div className={picker ? "flex flex-wrap items-center gap-3" : "contents"}>
+    <div className={picker ? "flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center" : "contents"}>
       {picker && (
         <div className="flex items-center border border-ink/20">
           <button
@@ -52,7 +52,7 @@ export function AddToCart({
       <button
         type="button"
         disabled={disabled}
-        className={className}
+        className={picker ? `${className} w-full sm:w-auto`.trim() : className}
         onClick={commit}
       >
         {done ? "In the tray ✓" : label}

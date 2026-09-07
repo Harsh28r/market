@@ -37,7 +37,7 @@ export default async function ProductPage({ params }: Props) {
   const rating = productRating(p.slug);
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-5 py-12">
+    <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-5 sm:py-12">
       <JsonLd data={productJsonLd(p, seo.siteUrl)} />
       <JsonLd
         data={breadcrumbJsonLd(
@@ -62,11 +62,11 @@ export default async function ProductPage({ params }: Props) {
           image={p.image}
           productName={p.name}
           hindiName={p.hindi}
-          className="min-h-[480px] w-full rounded border border-gold/30 shadow-md"
+          className="min-h-[280px] w-full rounded border border-gold/30 shadow-md sm:min-h-[380px] md:min-h-[480px]"
         />
         <div>
           <p className="font-deva text-ember">{p.hindi}</p>
-          <h1 className="font-display mt-1 text-5xl leading-tight">{p.name}</h1>
+          <h1 className="font-display mt-1 text-4xl leading-tight sm:text-5xl">{p.name}</h1>
           <div className="mt-3">
             <Stars score={rating.score} n={rating.n} />
           </div>
@@ -122,7 +122,7 @@ export default async function ProductPage({ params }: Props) {
               </li>
             ))}
           </ul>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
             <AddToCart
               slug={p.slug}
               disabled={out}
@@ -136,9 +136,10 @@ export default async function ProductPage({ params }: Props) {
               )}
               target="_blank"
               rel="noreferrer"
-              className="border border-[#25D366] px-6 py-4 text-[12px] tracking-[0.16em] uppercase text-[#128C4A] hover:bg-[#25D366] hover:text-white"
+              className="border border-[#25D366] px-6 py-4 text-center text-[12px] tracking-[0.16em] uppercase text-[#128C4A] hover:bg-[#25D366] hover:text-white"
             >
-              WhatsApp {WHATSAPP_DISPLAY}
+              <span className="sm:hidden">WhatsApp us</span>
+              <span className="hidden sm:inline">WhatsApp {WHATSAPP_DISPLAY}</span>
             </a>
           </div>
           <p className="mt-3 text-xs text-mist">

@@ -24,11 +24,14 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-gold/20 bg-ink/90 text-ivory backdrop-blur-md">
-      <div className="flex items-center justify-center bg-linear-to-r from-saffron via-gold to-saffron px-4 py-1.5 text-center text-[11px] font-semibold tracking-wider uppercase text-ink shadow-xs">
-        ⭐ Free shipping over ₹499 · Charcoal-free puja incense · Festival kits
+      <div className="flex items-center justify-center bg-linear-to-r from-saffron via-gold to-saffron px-3 py-1.5 text-center text-[10px] font-semibold tracking-wider uppercase text-ink shadow-xs sm:px-4 sm:text-[11px]">
+        <span className="sm:hidden">Free ship over ₹499 · Charcoal-free</span>
+        <span className="hidden sm:inline">
+          ⭐ Free shipping over ₹499 · Charcoal-free puja incense · Festival kits
+        </span>
       </div>
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
-        <ArpanLogo size="md" />
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2.5 sm:px-5 sm:py-3">
+        <ArpanLogo size="sm" className="min-w-0" />
         <nav className="hidden items-center gap-8 text-[12px] tracking-[0.18em] uppercase md:flex font-medium">
           {links.map((l) => (
             <Link
@@ -40,7 +43,7 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-5">
+        <div className="flex shrink-0 items-center gap-3 sm:gap-5">
           <a
             href={whatsappHref("Namaste — I want to order Arpan agarbatti.")}
             target="_blank"
@@ -57,7 +60,7 @@ export function Header() {
           </Link>
           <Link
             href="/cart"
-            className="relative flex items-center gap-2 rounded border border-gold/30 bg-ink/50 px-3.5 py-1.5 text-[12px] tracking-[0.16em] uppercase text-ivory hover:border-gold hover:text-gold transition"
+            className="relative flex items-center gap-1.5 rounded border border-gold/30 bg-ink/50 px-2.5 py-1.5 text-[11px] tracking-[0.16em] uppercase text-ivory hover:border-gold hover:text-gold transition sm:gap-2 sm:px-3.5 sm:text-[12px]"
           >
             <span>Cart</span>
             {count > 0 && (
@@ -68,23 +71,27 @@ export function Header() {
           </Link>
           <button
             type="button"
-            className="md:hidden"
+            className="flex h-9 w-9 items-center justify-center md:hidden"
             aria-label="Menu"
+            aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
-            <span className="block h-0.5 w-5 bg-ivory" />
-            <span className="mt-1 block h-0.5 w-5 bg-ivory" />
+            <span className="sr-only">Menu</span>
+            <span className="flex flex-col gap-1">
+              <span className="block h-0.5 w-5 bg-ivory" />
+              <span className="block h-0.5 w-5 bg-ivory" />
+            </span>
           </button>
         </div>
       </div>
       {open && (
-        <nav className="flex flex-col gap-3 border-t border-gold/20 bg-ink/95 px-5 py-4 text-xs tracking-[0.2em] uppercase md:hidden">
+        <nav className="flex flex-col gap-1 border-t border-gold/20 bg-ink/95 px-5 py-4 text-xs tracking-[0.2em] uppercase md:hidden">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="text-ivory/80 hover:text-gold py-1"
+              className="text-ivory/80 hover:text-gold py-2.5"
             >
               {l.label}
             </Link>
@@ -92,7 +99,7 @@ export function Header() {
           <Link
             href={accountHref}
             onClick={() => setOpen(false)}
-            className="text-ivory/80 hover:text-gold py-1"
+            className="text-ivory/80 hover:text-gold py-2.5"
           >
             {ready ? accountLabel : "Account"}
           </Link>
