@@ -15,6 +15,16 @@ import {
 } from "@/lib/customer-auth";
 
 export async function POST(req: Request) {
+  try {
+    return await handle(req);
+  } catch (e) {
+    console.error("[ARPAN OTP verify]", e);
+    const msg = e instanceof Error ? e.message : "Couldn’t verify.";
+    return Response.json({ error: msg }, { status: 500 });
+  }
+}
+
+async function handle(req: Request) {
   const body = (await req.json()) as { email?: string; code?: string };
   const email = String(body.email ?? "").trim().toLowerCase();
   const code = String(body.code ?? "").replace(/\D/g, "");

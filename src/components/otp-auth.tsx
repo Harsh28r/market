@@ -38,7 +38,7 @@ export function OtpAuth({ mode, next }: { mode: Mode; next: string }) {
         ...(collectSignup ? { name, phone } : {}),
       }),
     });
-    const data = (await res.json()) as {
+    const data = (await res.json().catch(() => ({}))) as {
       error?: string;
       needsSignup?: boolean;
     };
@@ -65,7 +65,7 @@ export function OtpAuth({ mode, next }: { mode: Mode; next: string }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, code }),
     });
-    const data = (await res.json()) as {
+    const data = (await res.json().catch(() => ({}))) as {
       error?: string;
       needsProfile?: boolean;
     };
@@ -93,7 +93,7 @@ export function OtpAuth({ mode, next }: { mode: Mode; next: string }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, phone }),
     });
-    const data = (await res.json()) as { error?: string };
+    const data = (await res.json().catch(() => ({}))) as { error?: string };
     if (!res.ok) {
       setErr(data.error ?? "Couldn’t save.");
       setBusy(false);

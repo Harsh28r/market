@@ -1,7 +1,9 @@
-import { mkdir, readFile, writeFile } from "fs/promises";
+import { readFile } from "fs/promises";
 import path from "path";
+import { MongoServerError, type Collection, type Document } from "mongodb";
 import { products as seedProducts, type Product } from "@/lib/products";
 import { defaultSiteSeo, type SiteSeo } from "@/lib/seo";
+import { getDb } from "@/lib/mongo";
 
 export type OrderStatus =
   | "placed"
@@ -68,276 +70,245 @@ export function toPublicUser(user: User | PublicUser): PublicUser {
   return rest;
 }
 
+type MetaSeo = SiteSeo & { _id: "seo" };
+type MetaSeq = { _id: "orderSeq"; seq: number };
+type OtpDoc = EmailOtp & { _id: string; expiresAt: Date };
+
 const FILE = path.join(process.cwd(), "data", "db.json");
 
-const seedOrders: Order[] = [
-  {
-    id: "ARP-2408",
-    createdAt: "2026-08-29T08:12:00.000Z",
-    customer: {
-      name: "Meera Kulkarni",
-      phone: "9876543210",
-      address: "12 Lane 4, Kothrud, Pune 411038",
-    },
-    pay: "cod",
-    items: [
-      { slug: "nag-champa-aarti", name: "Nag Champa Aarti", price: 149, qty: 3 },
-    ],
-    subtotal: 447,
-    ship: 79,
-    total: 526,
-    status: "packed",
-  },
-  {
-    id: "ARP-2407",
-    createdAt: "2026-08-28T14:40:00.000Z",
-    customer: {
-      name: "Arjun Shah",
-      phone: "9811122233",
-      address: "Koramangala 5th block, Bengaluru 560095",
-    },
-    pay: "upi",
-    items: [{ slug: "nitya-box", name: "Nitya Box", price: 349, qty: 1 }],
-    subtotal: 349,
-    ship: 79,
-    total: 428,
-    status: "shipped",
-  },
-  {
-    id: "ARP-2406",
-    createdAt: "2026-08-28T09:05:00.000Z",
-    customer: {
-      name: "Fatima Rizvi",
-      phone: "9000011122",
-      address: "Banjara Hills, Hyderabad 500034",
-    },
-    pay: "cod",
-    items: [
-      { slug: "loban-resin", name: "Loban Resin", price: 219, qty: 2 },
-      { slug: "kapur-jyoti", name: "Kapur Jyoti", price: 129, qty: 1 },
-    ],
-    subtotal: 567,
-    ship: 79,
-    total: 646,
-    status: "placed",
-  },
-  {
-    id: "ARP-2405",
-    createdAt: "2026-08-27T18:22:00.000Z",
-    customer: {
-      name: "Nandini Patel",
-      phone: "9825098765",
-      address: "Navrangpura, Ahmedabad 380009",
-    },
-    pay: "upi",
-    items: [
-      { slug: "ganesh-utsav-kit", name: "Ganesh Utsav Kit", price: 799, qty: 1 },
-    ],
-    subtotal: 799,
-    ship: 0,
-    total: 799,
-    status: "delivered",
-  },
-  {
-    id: "ARP-2404",
-    createdAt: "2026-08-26T11:10:00.000Z",
-    customer: {
-      name: "Rahul Iyer",
-      phone: "9444012345",
-      address: "Adyar, Chennai 600020",
-    },
-    pay: "cod",
-    items: [
-      { slug: "mysore-chandan", name: "Mysore Chandan", price: 249, qty: 2 },
-      { slug: "tulsi-vana", name: "Tulsi Vana", price: 159, qty: 1 },
-    ],
-    subtotal: 657,
-    ship: 79,
-    total: 736,
-    status: "shipped",
-  },
-  {
-    id: "ARP-2403",
-    createdAt: "2026-08-25T16:48:00.000Z",
-    customer: {
-      name: "Sana Qureshi",
-      phone: "9810098100",
-      address: "Hauz Khas, New Delhi 110016",
-    },
-    pay: "upi",
-    items: [
-      { slug: "gulab-raj", name: "Gulab Raj", price: 189, qty: 4 },
-      { slug: "kewra-ghar", name: "Kewra Ghar", price: 199, qty: 1 },
-    ],
-    subtotal: 955,
-    ship: 0,
-    total: 955,
-    status: "delivered",
-  },
-];
+function omitId<T extends { _id?: unknown }>(doc: T): Omit<T, "_id"> {
+  const { _id: _unused, ...rest } = doc;
+  void _unused;
+  return rest;
+}
 
-function seed(): DB {
-  return {
+async function col<T extends Document>(name: string): Promise<Collection<T>> {
+  await boot();
+  const db = await getDb();
+  return db.collection<T>(name);
+}
+
+let bootPromise: Promise<void> | null = null;
+
+function boot() {
+  if (!bootPromise) bootPromise = bootOnce();
+  return bootPromise;
+}
+
+async function bootOnce() {
+  const db = await getDb();
+  const products = db.collection<Product & { _id: string }>("products");
+  const users = db.collection<User & { _id: string }>("users");
+  const orders = db.collection<Order & { _id: string }>("orders");
+  const otps = db.collection<OtpDoc>("otps");
+  const meta = db.collection<MetaSeo | MetaSeq>("meta");
+
+  await Promise.all([
+    products.createIndex({ slug: 1 }, { unique: true }),
+    users.createIndex({ email: 1 }, { unique: true }),
+    orders.createIndex({ userId: 1, createdAt: -1 }),
+    otps.createIndex({ expiresAt: 1 }, { expireAfterSeconds: 0 }),
+  ]);
+
+  if ((await products.countDocuments()) > 0) return;
+
+  let seed: Partial<DB> = {
     products: seedProducts,
-    orders: seedOrders,
+    orders: [],
     users: [],
-    otps: [],
     seq: 2409,
     seo: defaultSiteSeo,
   };
-}
-
-function normalize(parsed: Partial<DB>): DB {
-  return {
-    products: parsed.products ?? [],
-    orders: parsed.orders ?? [],
-    users: (parsed.users ?? []).map((u) => ({
-      ...u,
-      emailVerified: Boolean(u.emailVerified),
-    })),
-    otps: (parsed.otps ?? []).filter((o) => o.exp > Date.now()),
-    seq: parsed.seq ?? 2409,
-    seo: { ...defaultSiteSeo, ...parsed.seo },
-  };
-}
-
-async function readDb(): Promise<DB> {
   try {
-    const raw = await readFile(FILE, "utf8");
-    const parsed = JSON.parse(raw) as Partial<DB>;
-    if (!parsed.products?.length) return seed();
-    const db = normalize(parsed);
-    if (!parsed.seo) await persist(db);
-    return db;
+    const parsed = JSON.parse(await readFile(FILE, "utf8")) as Partial<DB>;
+    if (parsed.products?.length) seed = parsed;
   } catch {
-    const db = seed();
-    await persist(db);
-    return db;
+    /* first deploy with empty Atlas — catalog from code */
   }
-}
 
-async function persist(db: DB) {
-  await mkdir(path.dirname(FILE), { recursive: true });
-  await writeFile(FILE, JSON.stringify(db, null, 2));
+  const productDocs = (seed.products ?? seedProducts).map((p) => ({
+    ...p,
+    _id: p.slug,
+  }));
+  const orderDocs = (seed.orders ?? []).map((o) => ({ ...o, _id: o.id }));
+  const userDocs = (seed.users ?? []).map((u) => ({
+    ...u,
+    email: u.email.trim().toLowerCase(),
+    emailVerified: Boolean(u.emailVerified),
+    _id: u.id,
+  }));
+
+  try {
+    if (productDocs.length) await products.insertMany(productDocs, { ordered: false });
+  } catch (err) {
+    if (!(err instanceof MongoServerError && err.code === 11000)) throw err;
+  }
+  try {
+    if (orderDocs.length) await orders.insertMany(orderDocs, { ordered: false });
+  } catch (err) {
+    if (!(err instanceof MongoServerError && err.code === 11000)) throw err;
+  }
+  try {
+    if (userDocs.length) await users.insertMany(userDocs, { ordered: false });
+  } catch (err) {
+    if (!(err instanceof MongoServerError && err.code === 11000)) throw err;
+  }
+
+  await meta.updateOne(
+    { _id: "orderSeq" },
+    { $setOnInsert: { seq: seed.seq ?? 2409 } },
+    { upsert: true },
+  );
+  await meta.updateOne(
+    { _id: "seo" },
+    { $setOnInsert: { ...defaultSiteSeo, ...seed.seo } },
+    { upsert: true },
+  );
 }
 
 export async function listProducts(opts?: { activeOnly?: boolean }) {
-  const db = await readDb();
-  const list = db.products;
+  const products = await col<Product & { _id: string }>("products");
+  const list = (await products.find().toArray()).map((p) => omitId(p) as Product);
   return opts?.activeOnly ? list.filter((p) => p.active) : list;
 }
 
 export async function findProduct(slug: string) {
-  const db = await readDb();
-  return db.products.find((p) => p.slug === slug);
+  const products = await col<Product & { _id: string }>("products");
+  const doc = await products.findOne({ slug });
+  return doc ? (omitId(doc) as Product) : undefined;
 }
 
 export async function upsertProduct(product: Product, prevSlug?: string) {
-  const db = await readDb();
+  const products = await col<Product & { _id: string }>("products");
   const key = prevSlug ?? product.slug;
-  const i = db.products.findIndex((p) => p.slug === key);
-  if (i >= 0) db.products[i] = product;
-  else db.products.unshift(product);
-  await persist(db);
+  if (key !== product.slug) {
+    await products.deleteOne({ _id: key });
+  }
+  await products.replaceOne(
+    { _id: product.slug },
+    product,
+    { upsert: true },
+  );
   return product;
 }
 
 export async function patchProduct(slug: string, patch: Partial<Product>) {
-  const db = await readDb();
-  const i = db.products.findIndex((p) => p.slug === slug);
-  if (i < 0) return null;
-  db.products[i] = { ...db.products[i], ...patch };
-  await persist(db);
-  return db.products[i];
+  const products = await col<Product & { _id: string }>("products");
+  const doc = await products.findOneAndUpdate(
+    { _id: slug },
+    { $set: patch },
+    { returnDocument: "after" },
+  );
+  return doc ? (omitId(doc) as Product) : null;
 }
 
 export async function removeProduct(slug: string) {
-  const db = await readDb();
-  db.products = db.products.filter((p) => p.slug !== slug);
-  await persist(db);
+  const products = await col<Product & { _id: string }>("products");
+  await products.deleteOne({ _id: slug });
 }
 
 export async function listOrders() {
-  const db = await readDb();
-  return [...db.orders].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  const orders = await col<Order & { _id: string }>("orders");
+  return (await orders.find().sort({ createdAt: -1 }).toArray()).map(
+    (o) => omitId(o) as Order,
+  );
 }
 
 export async function findOrder(id: string) {
-  const db = await readDb();
-  return db.orders.find((o) => o.id === id);
+  const orders = await col<Order & { _id: string }>("orders");
+  const doc = await orders.findOne({ _id: id });
+  return doc ? (omitId(doc) as Order) : undefined;
 }
 
 export async function createOrder(
   input: Omit<Order, "id" | "createdAt" | "status">,
 ) {
-  const db = await readDb();
-  const id = `ARP-${db.seq++}`;
+  const db = await getDb();
+  await boot();
+  const meta = db.collection<MetaSeq>("meta");
+  const products = db.collection<Product & { _id: string }>("products");
+  const orders = db.collection<Order & { _id: string }>("orders");
+
+  const before = await meta.findOneAndUpdate(
+    { _id: "orderSeq" },
+    { $inc: { seq: 1 } },
+    { returnDocument: "before", upsert: true },
+  );
+  const n = before?.seq ?? 2409;
+  const id = `ARP-${n}`;
+
   for (const line of input.items) {
-    const p = db.products.find((x) => x.slug === line.slug);
-    if (p) p.stock = Math.max(0, p.stock - line.qty);
+    await products.updateOne({ _id: line.slug }, [
+      { $set: { stock: { $max: [0, { $subtract: ["$stock", line.qty] }] } } },
+    ]);
   }
+
   const order: Order = {
     ...input,
     id,
     createdAt: new Date().toISOString(),
     status: "placed",
   };
-  db.orders.unshift(order);
-  await persist(db);
+  await orders.insertOne({ ...order, _id: id });
   return order;
 }
 
 export async function setOrderStatus(id: string, status: OrderStatus) {
-  const db = await readDb();
-  const order = db.orders.find((o) => o.id === id);
+  const db = await getDb();
+  await boot();
+  const orders = db.collection<Order & { _id: string }>("orders");
+  const products = db.collection<Product & { _id: string }>("products");
+  const order = await orders.findOne({ _id: id });
   if (!order) return null;
   if (order.status !== "cancelled" && status === "cancelled") {
     for (const line of order.items) {
-      const p = db.products.find((x) => x.slug === line.slug);
-      if (p) p.stock += line.qty;
+      await products.updateOne({ _id: line.slug }, { $inc: { stock: line.qty } });
     }
   }
-  order.status = status;
-  await persist(db);
-  return order;
+  const next = await orders.findOneAndUpdate(
+    { _id: id },
+    { $set: { status } },
+    { returnDocument: "after" },
+  );
+  return next ? (omitId(next) as Order) : null;
 }
 
 export async function getSeo(): Promise<SiteSeo> {
-  const db = await readDb();
-  return db.seo;
+  const meta = await col<MetaSeo>("meta");
+  const doc = await meta.findOne({ _id: "seo" });
+  return { ...defaultSiteSeo, ...omitId(doc ?? { _id: "seo" }) };
 }
 
 export async function saveSeo(patch: Partial<SiteSeo>): Promise<SiteSeo> {
-  const db = await readDb();
-  db.seo = { ...defaultSiteSeo, ...db.seo, ...patch };
-  await persist(db);
-  return db.seo;
+  const current = await getSeo();
+  const next = { ...defaultSiteSeo, ...current, ...patch };
+  const meta = await col<MetaSeo>("meta");
+  await meta.updateOne({ _id: "seo" }, { $set: next }, { upsert: true });
+  return next;
 }
 
 export async function listUsers(): Promise<PublicUser[]> {
-  const db = await readDb();
-  return db.users.map(toPublicUser);
+  const users = await col<User & { _id: string }>("users");
+  return (await users.find().toArray()).map((u) => toPublicUser(omitId(u) as User));
 }
 
 export async function findUserById(id: string) {
-  const db = await readDb();
-  return db.users.find((u) => u.id === id);
+  const users = await col<User & { _id: string }>("users");
+  const doc = await users.findOne({ _id: id });
+  return doc ? (omitId(doc) as User) : undefined;
 }
 
 export async function findUserByEmail(email: string) {
-  const db = await readDb();
-  const key = email.trim().toLowerCase();
-  return db.users.find((u) => u.email === key);
+  const users = await col<User & { _id: string }>("users");
+  const doc = await users.findOne({ email: email.trim().toLowerCase() });
+  return doc ? (omitId(doc) as User) : undefined;
 }
 
 export async function createUser(
   input: Omit<User, "id" | "createdAt">,
 ): Promise<PublicUser> {
-  const db = await readDb();
+  const users = await col<User & { _id: string }>("users");
   const email = input.email.trim().toLowerCase();
-  if (db.users.some((u) => u.email === email)) {
-    throw new Error("email taken");
-  }
   const user: User = {
     ...input,
     email,
@@ -345,8 +316,14 @@ export async function createUser(
     id: `usr_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`,
     createdAt: new Date().toISOString(),
   };
-  db.users.unshift(user);
-  await persist(db);
+  try {
+    await users.insertOne({ ...user, _id: user.id });
+  } catch (err) {
+    if (err instanceof MongoServerError && err.code === 11000) {
+      throw new Error("email taken");
+    }
+    throw err;
+  }
   return toPublicUser(user);
 }
 
@@ -354,48 +331,64 @@ export async function updateUser(
   id: string,
   patch: Partial<Pick<User, "name" | "phone" | "address" | "emailVerified">>,
 ): Promise<PublicUser | null> {
-  const db = await readDb();
-  const i = db.users.findIndex((u) => u.id === id);
-  if (i < 0) return null;
-  db.users[i] = { ...db.users[i], ...patch };
-  await persist(db);
-  return toPublicUser(db.users[i]);
+  const users = await col<User & { _id: string }>("users");
+  const doc = await users.findOneAndUpdate(
+    { _id: id },
+    { $set: patch },
+    { returnDocument: "after" },
+  );
+  return doc ? toPublicUser(omitId(doc) as User) : null;
 }
 
 export async function listOrdersByUser(userId: string) {
-  const db = await readDb();
-  return db.orders
-    .filter((o) => o.userId === userId)
-    .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  const orders = await col<Order & { _id: string }>("orders");
+  return (
+    await orders.find({ userId }).sort({ createdAt: -1 }).toArray()
+  ).map((o) => omitId(o) as Order);
 }
 
 export async function putOtp(otp: EmailOtp) {
-  const db = await readDb();
-  db.otps = db.otps.filter((o) => o.email !== otp.email && o.exp > Date.now());
-  db.otps.push(otp);
-  await persist(db);
+  const otps = await col<OtpDoc>("otps");
+  const email = otp.email.trim().toLowerCase();
+  const doc: OtpDoc = {
+    ...otp,
+    email,
+    _id: email,
+    expiresAt: new Date(otp.exp),
+  };
+  await otps.replaceOne({ _id: email }, doc, { upsert: true });
   return otp;
 }
 
 export async function findOtp(email: string) {
-  const db = await readDb();
+  const otps = await col<OtpDoc>("otps");
   const key = email.trim().toLowerCase();
-  return db.otps.find((o) => o.email === key && o.exp > Date.now()) ?? null;
+  const doc = await otps.findOne({ _id: key, exp: { $gt: Date.now() } });
+  if (!doc) return null;
+  const { _id: _unused, expiresAt: _exp, ...otp } = doc;
+  void _unused;
+  void _exp;
+  return otp;
 }
 
 export async function touchOtp(email: string, patch: Partial<EmailOtp>) {
-  const db = await readDb();
+  const otps = await col<OtpDoc>("otps");
   const key = email.trim().toLowerCase();
-  const i = db.otps.findIndex((o) => o.email === key);
-  if (i < 0) return null;
-  db.otps[i] = { ...db.otps[i], ...patch };
-  await persist(db);
-  return db.otps[i];
+  const $set: Document = { ...patch };
+  if (typeof patch.exp === "number") $set.expiresAt = new Date(patch.exp);
+  const doc = await otps.findOneAndUpdate(
+    { _id: key },
+    { $set },
+    { returnDocument: "after" },
+  );
+  if (!doc) return null;
+  const { _id: _unused, expiresAt: _exp, ...otp } = doc;
+  void _unused;
+  void _exp;
+  return otp;
 }
 
 export async function deleteOtp(email: string) {
-  const db = await readDb();
-  const key = email.trim().toLowerCase();
-  db.otps = db.otps.filter((o) => o.email !== key);
-  await persist(db);
+  const otps = await col<OtpDoc>("otps");
+  await otps.deleteOne({ _id: email.trim().toLowerCase() });
 }
