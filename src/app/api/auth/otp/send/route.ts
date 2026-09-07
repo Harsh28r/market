@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     return Response.json(
       {
         error:
-          "Mail not configured. Put GMAIL_USER + GMAIL_APP_PASSWORD in .env.local and restart the server.",
+          "Gmail not set. Add GMAIL_USER + GMAIL_APP_PASSWORD in Vercel env, then Redeploy.",
       },
       { status: 503 },
     );

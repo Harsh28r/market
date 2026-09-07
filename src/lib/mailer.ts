@@ -43,26 +43,24 @@ async function sendViaGmailOrSmtp(to: string, code: string): Promise<MailResult>
     throw new Error("missing smtp");
   }
 
-  const host = process.env.ARPAN_SMTP_HOST;
-  const gmail = !host && /@gmail\.com$/i.test(user);
-  const port = Number(process.env.ARPAN_SMTP_PORT || (gmail ? 465 : 587));
-  const transporter = nodemailer.createTransport(
-    gmail
-      ? {
-          service: "gmail",
-          auth: { user, pass },
-        }
-      : {
-          host: host || "smtp.gmail.com",
-          port,
-          secure: port === 465,
-          auth: { user, pass },
-        },
-  );
+  const host = process.env.ARPAN_SMTP_HOST || "smtp.gmail.com";
+  const gmail = /gmail\.com$/i.test(host) || /@gmail\.com$/i.test(user);
+  const port = Number(process.env.ARPAN_SMTP_PORT || 587);
+  const transporter = nodemailer.createTransport({
+    host,
+    port,
+    secure: port === 465,
+    requireTLS: port === 587,
+    auth: { user, pass },
+    connectionTimeout: 12_000,
+    greetingTimeout: 12_000,
+    socketTimeout: 20_000,
+  });
 
-  const fromName = process.env.ARPAN_MAIL_FROM || `ARPAN <${user}>`;
+  const from =
+    process.env.ARPAN_MAIL_FROM || `ARPAN Dhupa <${user}>`;
   await transporter.sendMail({
-    from: fromName,
+    from,
     to,
     replyTo: EMAIL,
     subject: `${code} is your ARPAN login code`,
@@ -118,6 +116,6 @@ export async function sendOtpMail(to: string, code: string): Promise<MailResult>
 
   throw new Error(
     errors[0] ||
-      "Mail not configured. Put GMAIL_USER + GMAIL_APP_PASSWORD in .env.local and restart npm run dev.",
+      "Gmail not set. Add GMAIL_USER and GMAIL_APP_PASSWORD in Vercel → Settings → Environment Variables, then Redeploy.",
   );
 }
