@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { Product } from "@/lib/products";
 import { productImage, productRating } from "@/lib/products";
-import { BRAND, DEFAULT_SEO, EMAIL, SITE_URL, WHATSAPP, WHATSAPP_DISPLAY } from "@/lib/site";
+import { BRAND, DEFAULT_SEO, EMAIL, INSTAGRAM_URL, SITE_URL, WHATSAPP, WHATSAPP_DISPLAY } from "@/lib/site";
 
 export type SiteSeo = {
   siteUrl: string;
@@ -184,7 +184,7 @@ export function orgJsonLd(seo: SiteSeo) {
     telephone: WHATSAPP_DISPLAY,
     description: seo.description,
     logo: absUrl("/favicon.svg", seo.siteUrl),
-    sameAs: [`https://wa.me/91${WHATSAPP}`],
+    sameAs: [`https://wa.me/91${WHATSAPP}`, INSTAGRAM_URL],
   };
 }
 

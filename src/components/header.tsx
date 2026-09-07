@@ -6,7 +6,7 @@ import { useAuth } from "@/context/auth";
 import { useCart } from "@/context/cart";
 
 import { ArpanLogo } from "@/components/brand-logo";
-import { whatsappHref } from "@/lib/site";
+import { INSTAGRAM_URL, whatsappHref } from "@/lib/site";
 
 const links = [
   { href: "/shop", label: "Shop" },
@@ -44,6 +44,14 @@ export function Header() {
           ))}
         </nav>
         <div className="flex shrink-0 items-center gap-3 sm:gap-5">
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden text-[11px] tracking-[0.14em] uppercase text-ivory/80 hover:text-gold md:inline"
+          >
+            Instagram
+          </a>
           <a
             href={whatsappHref("Namaste — I want to order Arpan agarbatti.")}
             target="_blank"
@@ -96,6 +104,14 @@ export function Header() {
               {l.label}
             </Link>
           ))}
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="text-ivory/80 hover:text-gold py-2.5"
+          >
+            Instagram
+          </a>
           <Link
             href={accountHref}
             onClick={() => setOpen(false)}

@@ -1,6 +1,8 @@
 export const WHATSAPP = "7822962756";
 export const WHATSAPP_DISPLAY = "+91 78229 62756";
 export const EMAIL = "hello@arpandhupa.in";
+export const INSTAGRAM = "arpandhupa";
+export const INSTAGRAM_URL = `https://instagram.com/${INSTAGRAM}`;
 export const FREE_SHIP_AT = 499;
 export const SHIP_FEE = 79;
 export const SITE_URL =

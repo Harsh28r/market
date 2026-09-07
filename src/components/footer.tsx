@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArpanLogo } from "@/components/brand-logo";
-import { EMAIL, WHATSAPP_DISPLAY, whatsappHref } from "@/lib/site";
+import { EMAIL, INSTAGRAM, INSTAGRAM_URL, WHATSAPP_DISPLAY, whatsappHref } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -58,6 +58,16 @@ export function Footer() {
             <li>
               <a href={`mailto:${EMAIL}`} className="break-all hover:text-gold transition">
                 ✉ {EMAIL}
+              </a>
+            </li>
+            <li>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-gold transition"
+              >
+                @{INSTAGRAM}
               </a>
             </li>
             <li>Nashik lot · COD across India</li>
