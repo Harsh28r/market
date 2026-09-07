@@ -7,8 +7,10 @@ import { listProducts } from "@/lib/store";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Shop by pooja",
-  description: "Agarbatti mapped to daily aarti, Lakshmi Friday, Shiva Monday, Ganesh utsav.",
+  title: "Shop by Pooja | Ganesh, Lakshmi, Shiva Agarbatti",
+  description:
+    "Pick agarbatti by ritual — daily aarti, Lakshmi Friday, Shiva Monday, Ganesh utsav. Charcoal-free temple incense mapped to the pooja, not the aisle.",
+  alternates: { canonical: "/rituals" },
 };
 
 export default async function RitualsPage() {

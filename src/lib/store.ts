@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
 import { products as seedProducts, type Product } from "@/lib/products";
+import { defaultSiteSeo, type SiteSeo } from "@/lib/seo";
 
 export type OrderStatus =
   | "placed"
@@ -19,7 +20,8 @@ export type OrderItem = {
 export type Order = {
   id: string;
   createdAt: string;
-  customer: { name: string; phone: string; address: string };
+  userId?: string;
+  customer: { name: string; phone: string; address: string; email?: string };
   pay: "cod" | "upi";
   items: OrderItem[];
   subtotal: number;
@@ -28,11 +30,43 @@ export type Order = {
   status: OrderStatus;
 };
 
+export type User = {
+  id: string;
+  email: string;
+  name: string;
+  phone: string;
+  address: string;
+  passwordHash?: string;
+  emailVerified: boolean;
+  createdAt: string;
+};
+
+export type PublicUser = Omit<User, "passwordHash">;
+
+export type EmailOtp = {
+  email: string;
+  hash: string;
+  exp: number;
+  attempts: number;
+  sentAt: number;
+  name?: string;
+  phone?: string;
+};
+
 export type DB = {
   products: Product[];
   orders: Order[];
+  users: User[];
+  otps: EmailOtp[];
   seq: number;
+  seo: SiteSeo;
 };
+
+export function toPublicUser(user: User | PublicUser): PublicUser {
+  const { passwordHash: _pw, ...rest } = user as User;
+  void _pw;
+  return rest;
+}
 
 const FILE = path.join(process.cwd(), "data", "db.json");
 
@@ -143,15 +177,38 @@ const seedOrders: Order[] = [
 ];
 
 function seed(): DB {
-  return { products: seedProducts, orders: seedOrders, seq: 2409 };
+  return {
+    products: seedProducts,
+    orders: seedOrders,
+    users: [],
+    otps: [],
+    seq: 2409,
+    seo: defaultSiteSeo,
+  };
+}
+
+function normalize(parsed: Partial<DB>): DB {
+  return {
+    products: parsed.products ?? [],
+    orders: parsed.orders ?? [],
+    users: (parsed.users ?? []).map((u) => ({
+      ...u,
+      emailVerified: Boolean(u.emailVerified),
+    })),
+    otps: (parsed.otps ?? []).filter((o) => o.exp > Date.now()),
+    seq: parsed.seq ?? 2409,
+    seo: { ...defaultSiteSeo, ...parsed.seo },
+  };
 }
 
 async function readDb(): Promise<DB> {
   try {
     const raw = await readFile(FILE, "utf8");
-    const parsed = JSON.parse(raw) as DB;
+    const parsed = JSON.parse(raw) as Partial<DB>;
     if (!parsed.products?.length) return seed();
-    return parsed;
+    const db = normalize(parsed);
+    if (!parsed.seo) await persist(db);
+    return db;
   } catch {
     const db = seed();
     await persist(db);
@@ -243,4 +300,102 @@ export async function setOrderStatus(id: string, status: OrderStatus) {
   order.status = status;
   await persist(db);
   return order;
+}
+
+export async function getSeo(): Promise<SiteSeo> {
+  const db = await readDb();
+  return db.seo;
+}
+
+export async function saveSeo(patch: Partial<SiteSeo>): Promise<SiteSeo> {
+  const db = await readDb();
+  db.seo = { ...defaultSiteSeo, ...db.seo, ...patch };
+  await persist(db);
+  return db.seo;
+}
+
+export async function listUsers(): Promise<PublicUser[]> {
+  const db = await readDb();
+  return db.users.map(toPublicUser);
+}
+
+export async function findUserById(id: string) {
+  const db = await readDb();
+  return db.users.find((u) => u.id === id);
+}
+
+export async function findUserByEmail(email: string) {
+  const db = await readDb();
+  const key = email.trim().toLowerCase();
+  return db.users.find((u) => u.email === key);
+}
+
+export async function createUser(
+  input: Omit<User, "id" | "createdAt">,
+): Promise<PublicUser> {
+  const db = await readDb();
+  const email = input.email.trim().toLowerCase();
+  if (db.users.some((u) => u.email === email)) {
+    throw new Error("email taken");
+  }
+  const user: User = {
+    ...input,
+    email,
+    emailVerified: input.emailVerified ?? true,
+    id: `usr_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`,
+    createdAt: new Date().toISOString(),
+  };
+  db.users.unshift(user);
+  await persist(db);
+  return toPublicUser(user);
+}
+
+export async function updateUser(
+  id: string,
+  patch: Partial<Pick<User, "name" | "phone" | "address" | "emailVerified">>,
+): Promise<PublicUser | null> {
+  const db = await readDb();
+  const i = db.users.findIndex((u) => u.id === id);
+  if (i < 0) return null;
+  db.users[i] = { ...db.users[i], ...patch };
+  await persist(db);
+  return toPublicUser(db.users[i]);
+}
+
+export async function listOrdersByUser(userId: string) {
+  const db = await readDb();
+  return db.orders
+    .filter((o) => o.userId === userId)
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+export async function putOtp(otp: EmailOtp) {
+  const db = await readDb();
+  db.otps = db.otps.filter((o) => o.email !== otp.email && o.exp > Date.now());
+  db.otps.push(otp);
+  await persist(db);
+  return otp;
+}
+
+export async function findOtp(email: string) {
+  const db = await readDb();
+  const key = email.trim().toLowerCase();
+  return db.otps.find((o) => o.email === key && o.exp > Date.now()) ?? null;
+}
+
+export async function touchOtp(email: string, patch: Partial<EmailOtp>) {
+  const db = await readDb();
+  const key = email.trim().toLowerCase();
+  const i = db.otps.findIndex((o) => o.email === key);
+  if (i < 0) return null;
+  db.otps[i] = { ...db.otps[i], ...patch };
+  await persist(db);
+  return db.otps[i];
+}
+
+export async function deleteOtp(email: string) {
+  const db = await readDb();
+  const key = email.trim().toLowerCase();
+  db.otps = db.otps.filter((o) => o.email !== key);
+  await persist(db);
 }

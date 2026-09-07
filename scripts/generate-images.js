@@ -189,6 +189,26 @@ const products = [
     `
   },
   {
+    slug: 'oud-ruh',
+    title: 'OUD RUH',
+    hindi: 'ऊद रूह',
+    bg1: '#24100a',
+    bg2: '#0c0503',
+    border: '#c45c26',
+    tag: 'NIGHT RESIN',
+    stickColor: '#5a2e16',
+    subtitle: 'Dark Wood Smoke & Amber',
+    details: '24 STICKS · 48 MIN BURN',
+    accentGraphic: `
+      <g transform="translate(200, 160) scale(0.85)">
+        <ellipse cx="0" cy="8" rx="26" ry="10" fill="#c45c26" opacity="0.35"/>
+        <path d="M-8,8 L-4,-18 L4,-18 L8,8 Z" fill="#8b3d1a"/>
+        <path d="M0,-18 Q-8,-36 0,-48 Q8,-36 0,-18 Z" fill="#e8c96a" opacity="0.75"/>
+        <circle cx="0" cy="-18" r="4" fill="#d4a017"/>
+      </g>
+    `
+  },
+  {
     slug: 'nitya-box',
     title: 'NITYA BOX',
     hindi: 'नित्य बॉक्स',
@@ -209,6 +229,14 @@ const products = [
     `
   }
 ];
+
+function xml(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
 
 function generateSVG(p) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520" width="100%" height="100%">
@@ -273,7 +301,7 @@ function generateSVG(p) {
       <text x="0" y="-34" font-family="'Noto Serif Devanagari', serif" font-weight="bold" font-size="11" text-anchor="middle" fill="#d4a017" letter-spacing="1.5">अर्पण · ARPAN DHUPA</text>
       <text x="0" y="-10" font-family="'Times New Roman', serif" font-weight="bold" font-size="16" text-anchor="middle" fill="#ffffff" letter-spacing="1.2">${p.title}</text>
       <line x1="-75" y1="2" x2="75" y2="2" stroke="#d4a017" stroke-width="0.8" opacity="0.5"/>
-      <text x="0" y="16" font-family="system-ui, sans-serif" font-weight="600" font-size="9" text-anchor="middle" fill="#e8c96a" letter-spacing="0.8">${p.subtitle.toUpperCase()}</text>
+      <text x="0" y="16" font-family="system-ui, sans-serif" font-weight="600" font-size="9" text-anchor="middle" fill="#e8c96a" letter-spacing="0.8">${xml(p.subtitle.toUpperCase())}</text>
       <text x="0" y="32" font-family="system-ui, sans-serif" font-weight="400" font-size="8" text-anchor="middle" fill="#8b7e74" letter-spacing="0.8">100% CHARCOAL-FREE ORGANIC MASALA</text>
     </g>
   </g>
@@ -306,7 +334,7 @@ function generateSVG(p) {
   <!-- Bottom Footer Box Label -->
   <g transform="translate(200, 475)">
     <rect x="-165" y="-12" width="330" height="24" rx="3" fill="#090403" stroke="${p.border}" stroke-width="0.8" opacity="0.9"/>
-    <text x="-150" y="4" font-family="'Noto Serif Devanagari', serif" font-size="10" fill="#d4a017">${p.hindi}</text>
+    <text x="-150" y="4" font-family="'Noto Serif Devanagari', serif" font-size="10" fill="#d4a017">${xml(p.hindi)}</text>
     <text x="0" y="4" font-family="system-ui, sans-serif" font-weight="600" font-size="8.5" text-anchor="middle" fill="#f4ead8" letter-spacing="0.8">${p.details}</text>
     <text x="150" y="4" font-family="system-ui, sans-serif" font-weight="700" font-size="8.5" text-anchor="end" fill="#d4a017">0% CHARCOAL</text>
   </g>

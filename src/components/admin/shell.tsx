@@ -7,7 +7,9 @@ import type { ReactNode } from "react";
 const nav = [
   { href: "/admin", label: "Overview" },
   { href: "/admin/orders", label: "Orders" },
+  { href: "/admin/customers", label: "Customers" },
   { href: "/admin/products", label: "Inventory" },
+  { href: "/admin/seo", label: "SEO" },
   { href: "/admin/products/new", label: "Add listing" },
 ];
 
@@ -46,7 +48,9 @@ export function AdminShell({ children }: { children: ReactNode }) {
                     ? path === "/admin/products" ||
                       (path.startsWith("/admin/products/") &&
                         path !== "/admin/products/new")
-                    : path === n.href || path.startsWith(`${n.href}/`);
+                    : n.href === "/admin/seo"
+                      ? path.startsWith("/admin/seo")
+                      : path === n.href || path.startsWith(`${n.href}/`);
             return (
               <Link
                 key={n.href}

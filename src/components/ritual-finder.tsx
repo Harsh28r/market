@@ -63,13 +63,21 @@ export function RitualFinder() {
               <li key={p.slug}>
                 <Link
                   href={`/product/${p.slug}`}
-                  className="flex gap-4 border border-ivory/10 p-3 transition hover:border-gold/50"
+                  className="flex gap-4 border border-ivory/10 bg-ivory/[0.03] p-3 transition hover:border-gold/50"
                 >
-                  <ProductArt scent={p.scent} className="h-20 w-16 shrink-0" />
-                  <div className="min-w-0">
-                    <p className="font-display text-xl">{p.name}</p>
-                    <p className="truncate text-sm text-ivory/50">{p.tagline}</p>
-                    <p className="mt-1 text-sm text-gold">{inr(p.price)}</p>
+                  <ProductArt
+                    slug={p.slug}
+                    image={p.image}
+                    productName={p.name}
+                    hindiName={p.hindi}
+                    compact
+                    className="h-32 w-24 shrink-0"
+                  />
+                  <div className="min-w-0 self-center">
+                    <p className="font-deva text-xs text-gold">{p.hindi}</p>
+                    <p className="font-display text-xl leading-tight">{p.name}</p>
+                    <p className="mt-1 truncate text-sm text-ivory/50">{p.tagline}</p>
+                    <p className="mt-2 text-sm text-gold">{inr(p.price)}</p>
                   </div>
                 </Link>
               </li>

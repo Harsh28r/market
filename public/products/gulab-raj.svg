@@ -68,7 +68,7 @@
       <text x="0" y="-34" font-family="'Noto Serif Devanagari', serif" font-weight="bold" font-size="11" text-anchor="middle" fill="#d4a017" letter-spacing="1.5">अर्पण · ARPAN DHUPA</text>
       <text x="0" y="-10" font-family="'Times New Roman', serif" font-weight="bold" font-size="16" text-anchor="middle" fill="#ffffff" letter-spacing="1.2">GULAB RAJ</text>
       <line x1="-75" y1="2" x2="75" y2="2" stroke="#d4a017" stroke-width="0.8" opacity="0.5"/>
-      <text x="0" y="16" font-family="system-ui, sans-serif" font-weight="600" font-size="9" text-anchor="middle" fill="#e8c96a" letter-spacing="0.8">DAMASK ROSE PETALS & PURE ATTAR</text>
+      <text x="0" y="16" font-family="system-ui, sans-serif" font-weight="600" font-size="9" text-anchor="middle" fill="#e8c96a" letter-spacing="0.8">DAMASK ROSE PETALS &amp; PURE ATTAR</text>
       <text x="0" y="32" font-family="system-ui, sans-serif" font-weight="400" font-size="8" text-anchor="middle" fill="#8b7e74" letter-spacing="0.8">100% CHARCOAL-FREE ORGANIC MASALA</text>
     </g>
   </g>

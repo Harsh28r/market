@@ -79,6 +79,7 @@ export default function InventoryPage() {
               <th className="font-medium">Price</th>
               <th className="font-medium">Stock</th>
               <th className="font-medium">Live</th>
+              <th className="font-medium">SEO</th>
               <th />
             </tr>
           </thead>
@@ -107,6 +108,13 @@ export default function InventoryPage() {
                   >
                     {p.active ? "On" : "Off"}
                   </button>
+                </td>
+                <td className="text-[11px] uppercase tracking-wide">
+                  {p.seoTitle && p.seoDescription ? (
+                    <span className="text-ember">Set</span>
+                  ) : (
+                    <span className="text-mist">Auto</span>
+                  )}
                 </td>
                 <td className="text-right">
                   <Link

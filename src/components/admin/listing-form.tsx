@@ -12,6 +12,7 @@ import {
   type Product,
   type ScentKey,
 } from "@/lib/products";
+import { SITE_URL } from "@/lib/site";
 
 const empty: Product = {
   slug: "",
@@ -31,6 +32,8 @@ const empty: Product = {
   sku: "",
   stock: 80,
   active: true,
+  seoTitle: "",
+  seoDescription: "",
 };
 
 function csv(list: string[]) {
@@ -70,6 +73,8 @@ export function ListingForm({ initial }: { initial?: Product }) {
       slug: form.slug || slugify(form.name),
       sku: form.sku || `ARP-${slugify(form.name).slice(0, 8).toUpperCase()}`,
       badge: form.badge || undefined,
+      seoTitle: form.seoTitle?.trim() || undefined,
+      seoDescription: form.seoDescription?.trim() || undefined,
     };
     const url = editing
       ? `/api/products/${initial!.slug}`
@@ -275,6 +280,46 @@ export function ListingForm({ initial }: { initial?: Product }) {
           </div>
         </section>
 
+        <section className="border border-ink/10 bg-ivory p-6">
+          <p className="text-[10px] tracking-[0.2em] uppercase text-ember">
+            SEO · Google
+          </p>
+          <p className="mt-1 text-xs text-mist">
+            Empty = auto from name + tagline. Keep title ≤ 60, description ≤ 160.
+          </p>
+          <div className="mt-4 space-y-4">
+            <Field label={`SEO title (${(form.seoTitle ?? "").length}/60)`}>
+              <input
+                value={form.seoTitle ?? ""}
+                onChange={(e) => set("seoTitle", e.target.value)}
+                className="field"
+                placeholder={`${form.name || "Product"} Agarbatti | Charcoal-Free | ARPAN`}
+              />
+            </Field>
+            <Field label={`Meta description (${(form.seoDescription ?? "").length}/160)`}>
+              <textarea
+                rows={3}
+                value={form.seoDescription ?? ""}
+                onChange={(e) => set("seoDescription", e.target.value)}
+                className="field"
+                placeholder={form.tagline || "Hand-rolled charcoal-free agarbatti. COD India."}
+              />
+            </Field>
+          </div>
+          <div className="mt-4 border border-ink/10 bg-paper p-3">
+            <p className="text-[10px] tracking-[0.16em] uppercase text-mist">Snippet</p>
+            <p className="mt-2 text-sm text-[#1a0dab]">
+              {(form.seoTitle || `${form.name || "Untitled"} Agarbatti | ARPAN`).slice(0, 60)}
+            </p>
+            <p className="text-xs text-[#006621]">
+              {SITE_URL.replace(/^https?:\/\//, "")}/product/{form.slug || "slug"}
+            </p>
+            <p className="mt-1 text-sm text-[#4d5156]">
+              {(form.seoDescription || form.tagline || "Meta description").slice(0, 160)}
+            </p>
+          </div>
+        </section>
+
         {err && <p className="text-sm text-ember">{err}</p>}
         <button
           type="submit"
@@ -290,7 +335,14 @@ export function ListingForm({ initial }: { initial?: Product }) {
           Customer sees this
         </p>
         <div className="mt-3 border border-ink/10 bg-paper p-3">
-          <ProductArt scent={preview.scent} className="aspect-3/4 w-full" />
+          <ProductArt
+            slug={preview.slug}
+            scent={preview.scent}
+            image={preview.image}
+            productName={preview.name}
+            hindiName={preview.hindi}
+            className="aspect-3/4 w-full"
+          />
           {preview.badge && (
             <p className="mt-3 text-[10px] tracking-[0.16em] uppercase text-ember">
               {preview.badge}

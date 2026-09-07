@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { AddToCart } from "@/components/add-to-cart";
 import { ProductArt } from "@/components/product-art";
-import { inr, type Product } from "@/lib/products";
+import { Stars } from "@/components/stars";
+import { inr, productRating, type Product } from "@/lib/products";
 
 export function ProductCard({ product }: { product: Product }) {
   const off = Math.round((1 - product.price / Math.max(product.mrp, product.price)) * 100);
@@ -11,6 +12,7 @@ export function ProductCard({ product }: { product: Product }) {
     <article className="group flex flex-col bg-paper border border-ink/10 rounded-sm p-3 hover:border-gold/50 transition duration-300 shadow-xs">
       <Link href={`/product/${product.slug}`} className="relative block overflow-hidden rounded-sm">
         <ProductArt
+          slug={product.slug}
           scent={product.scent}
           image={product.image}
           productName={product.name}
@@ -32,6 +34,9 @@ export function ProductCard({ product }: { product: Product }) {
             Last {product.stock}
           </span>
         )}
+        <span className="absolute bottom-3 left-3 z-20 bg-ink/85 px-2.5 py-1 text-[10px] font-medium tracking-[0.12em] uppercase text-gold backdrop-blur-md">
+          {product.burn} burn
+        </span>
       </Link>
 
       <div className="flex flex-1 flex-col pt-3.5 px-1">
@@ -43,6 +48,9 @@ export function ProductCard({ product }: { product: Product }) {
           <h3 className="font-display text-2xl font-bold leading-tight mt-0.5 text-ink group-hover:text-ember transition">
             {product.name}
           </h3>
+          <div className="mt-1">
+            <Stars {...productRating(product.slug)} />
+          </div>
           <p className="mt-1 text-xs text-mist line-clamp-2 leading-relaxed">{product.tagline}</p>
         </Link>
 
@@ -66,11 +74,12 @@ export function ProductCard({ product }: { product: Product }) {
             {off > 0 && (
               <span className="ml-1.5 text-[10px] font-bold text-ember">{off}% off</span>
             )}
+            <p className="text-[10px] text-mist">Incl. of tax</p>
           </div>
           <AddToCart
             slug={product.slug}
             disabled={out}
-            label={out ? "Gone" : "+ Add"}
+            label={out ? "Gone" : "ADD"}
             className="bg-ink px-4 py-2 text-[11px] font-bold tracking-[0.16em] uppercase text-ivory hover:bg-saffron hover:text-ink transition rounded-sm disabled:cursor-not-allowed disabled:opacity-40"
           />
         </div>

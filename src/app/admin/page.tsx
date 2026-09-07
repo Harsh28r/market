@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { inr } from "@/lib/products";
-import { listOrders, listProducts } from "@/lib/store";
+import { listOrders, listProducts, listUsers } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
 
@@ -13,9 +13,10 @@ const statusLabel: Record<string, string> = {
 };
 
 export default async function AdminHome() {
-  const [orders, products] = await Promise.all([
+  const [orders, products, users] = await Promise.all([
     listOrders(),
     listProducts(),
+    listUsers(),
   ]);
   const live = orders.filter((o) => o.status !== "cancelled");
   const gmv = live.reduce((n, o) => n + o.total, 0);
@@ -25,6 +26,7 @@ export default async function AdminHome() {
   );
   const aov = live.length ? Math.round(gmv / live.length) : 0;
   const low = products.filter((p) => p.active && p.stock < 20);
+  const seoMissing = products.filter((p) => p.active && (!p.seoTitle || !p.seoDescription));
   const pipeline = ["placed", "packed", "shipped", "delivered"] as const;
   const counts = Object.fromEntries(
     pipeline.map((s) => [s, orders.filter((o) => o.status === s).length]),
@@ -46,12 +48,20 @@ export default async function AdminHome() {
           </p>
           <h1 className="font-display mt-1 text-4xl">Overview</h1>
         </div>
-        <Link
-          href="/admin/products/new"
-          className="bg-ink px-5 py-2.5 text-[11px] tracking-[0.16em] uppercase text-ivory"
-        >
-          + Add listing
-        </Link>
+        <div className="flex gap-3">
+          <Link
+            href="/admin/seo"
+            className="border border-ink/20 px-5 py-2.5 text-[11px] tracking-[0.16em] uppercase"
+          >
+            SEO
+          </Link>
+          <Link
+            href="/admin/products/new"
+            className="bg-ink px-5 py-2.5 text-[11px] tracking-[0.16em] uppercase text-ivory"
+          >
+            + Add listing
+          </Link>
+        </div>
       </div>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -85,6 +95,38 @@ export default async function AdminHome() {
           </Link>
         ))}
       </div>
+
+      <Link
+        href="/admin/customers"
+        className="mt-6 flex items-center justify-between border border-ink/10 bg-ivory px-5 py-4 hover:border-saffron"
+      >
+        <div>
+          <p className="text-[10px] tracking-[0.18em] uppercase text-mist">Customers</p>
+          <p className="font-display mt-1 text-2xl">
+            {users.length === 0 ? "No accounts yet" : `${users.length} signed up`}
+          </p>
+          <p className="mt-1 text-xs text-mist">Storefront login · order history attached</p>
+        </div>
+        <span className="text-[11px] tracking-[0.14em] uppercase text-ember">Open →</span>
+      </Link>
+
+      <Link
+        href="/admin/seo"
+        className="mt-6 flex items-center justify-between border border-ink/10 bg-ivory px-5 py-4 hover:border-saffron"
+      >
+        <div>
+          <p className="text-[10px] tracking-[0.18em] uppercase text-mist">SEO health</p>
+          <p className="font-display mt-1 text-2xl">
+            {seoMissing.length === 0
+              ? "Titles auto-generated"
+              : `${seoMissing.length} listings without custom meta`}
+          </p>
+          <p className="mt-1 text-xs text-mist">
+            Sitemap + robots live. Admin is noindex. Edit homepage title in SEO.
+          </p>
+        </div>
+        <span className="text-[11px] tracking-[0.14em] uppercase text-ember">Open →</span>
+      </Link>
 
       <div className="mt-10 grid gap-8 lg:grid-cols-3">
         <section className="lg:col-span-2">

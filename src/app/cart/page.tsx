@@ -2,12 +2,15 @@
 
 import Link from "next/link";
 import { ProductArt } from "@/components/product-art";
+import { useAuth } from "@/context/auth";
 import { useCart } from "@/context/cart";
 import { inr } from "@/lib/products";
+import { FREE_SHIP_AT, SHIP_FEE } from "@/lib/site";
 
 export default function CartPage() {
   const { items, setQty, remove, subtotal, count } = useCart();
-  const ship = subtotal >= 799 || subtotal === 0 ? 0 : 79;
+  const { user } = useAuth();
+  const ship = subtotal >= FREE_SHIP_AT || subtotal === 0 ? 0 : SHIP_FEE;
   const total = subtotal + ship;
 
   return (
@@ -33,11 +36,12 @@ export default function CartPage() {
                 className="flex gap-4 border-b border-ink/10 pb-6"
               >
                 <ProductArt
+                  slug={product.slug}
                   image={product.image}
                   productName={product.name}
                   hindiName={product.hindi}
-                  compact={true}
-                  className="h-24 w-20 shrink-0 shadow-sm"
+                  compact
+                  className="h-28 w-24 shrink-0 shadow-sm"
                 />
                 <div className="flex flex-1 flex-col">
                   <div className="flex justify-between gap-4">
@@ -86,24 +90,29 @@ export default function CartPage() {
               </div>
               <div className="flex justify-between">
                 <dt>Ship</dt>
-                <dd>{ship === 0 ? "Free mala + ship" : inr(ship)}</dd>
+                <dd>{ship === 0 ? "Free" : inr(ship)}</dd>
               </div>
               <div className="flex justify-between border-t border-ink/10 pt-3 text-base">
                 <dt>Due</dt>
                 <dd>{inr(total)}</dd>
               </div>
             </dl>
-            {subtotal < 799 && (
+            {subtotal > 0 && subtotal < FREE_SHIP_AT && (
               <p className="mt-3 text-xs text-mist">
-                Add {inr(799 - subtotal)} for free ship + marigold mala.
+                Add {inr(FREE_SHIP_AT - subtotal)} for free shipping + brass holder.
               </p>
             )}
             <Link
-              href="/checkout"
+              href={user ? "/checkout" : "/login?next=/checkout"}
               className="mt-6 block bg-ink py-3 text-center text-[12px] tracking-[0.18em] uppercase text-ivory"
             >
-              Checkout
+              {user ? "Checkout" : "Verify email to checkout"}
             </Link>
+            {!user && (
+              <p className="mt-3 text-center text-xs text-mist">
+                6-digit code to your mail. Then the order goes through.
+              </p>
+            )}
           </aside>
         </div>
       )}

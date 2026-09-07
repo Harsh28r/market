@@ -27,6 +27,8 @@ export type Product = {
   story: string;
   badge?: string;
   image?: string;
+  seoTitle?: string;
+  seoDescription?: string;
   sku: string;
   stock: number;
   active: boolean;
@@ -62,7 +64,7 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     story:
       "ARPAN temple-grade nag champa without cheap charcoal bite. Hand-rolled with pure champaca flower extract, golden halmaddi resin, and ground mysore sandalwood.",
     badge: "House staple",
-    image: "/nag_champa_box.jpg",
+    image: "/products/nag-champa-aarti.jpg",
   },
   {
     slug: "mysore-chandan",
@@ -80,7 +82,7 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     story:
       "ARPAN Mysore Chandan features pure ground sandalwood dust and cold-pressed sandal essential oil. Calm, golden, and deeply meditative.",
     badge: "Premium",
-    image: "/mysore_chandan_box.jpg",
+    image: "/products/mysore-chandan.jpg",
   },
   {
     slug: "gulab-raj",
@@ -98,17 +100,17 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     story:
       "Crafted with natural Damask rose attar distilled in traditional copper degs of Kannauj. ARPAN Gulab Raj brings divine flower fragrance into your pooja room.",
     badge: "Friday ritual",
-    image: "/vedasakti_rose.jpg",
+    image: "/products/gulab-raj.jpg",
   },
   {
     slug: "loban-resin",
     name: "Loban Resin Dhoop",
     hindi: "लोहबान धुप",
-    tagline: "Sacred Benzoin & Frankincense Resin for Energy Cleansing.",
-    price: 219,
-    mrp: 279,
-    scent: "loban",
-    family: "resin",
+      tagline: "Sacred Benzoin & Frankincense Resin for Energy Cleansing.",
+      price: 219,
+      mrp: 279,
+      scent: "loban",
+      family: "resin",
     sticks: "25 sticks + 8 cones",
     burn: "35 min",
     bestFor: ["Cleansing", "Navratri", "After guests"],
@@ -116,7 +118,7 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     story:
       "ARPAN Loban Resin is made from pure tree resins. Creates rich purifying temple smoke that eliminates negative energy and purifies home air.",
     badge: "Cleansing",
-    image: "/vedasakti_craft.jpg",
+    image: "/products/loban-resin.jpg",
   },
   {
     slug: "mogra-raat",
@@ -133,7 +135,7 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     notes: ["Mogra", "Green stem", "Dew"],
     story:
       "ARPAN Mogra Raat captures fresh white jasmine blossoms. Rolled in natural bamboo stick with botanical binder.",
-    image: "/vedasakti_rose.jpg",
+    image: "/products/mogra-raat.jpg",
   },
   {
     slug: "kapur-jyoti",
@@ -150,7 +152,7 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     notes: ["Bhimseni camphor", "Cool mint", "White smoke"],
     story:
       "ARPAN Kapur Jyoti uses 100% organic Bhimseni camphor that burns spotless and leaves a crisp, sacred aura in your home.",
-    image: "/vedasakti_hero.jpg",
+    image: "/products/kapur-jyoti.jpg",
   },
   {
     slug: "tulsi-vana",
@@ -167,7 +169,7 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     notes: ["Holy basil", "Clove", "Dry leaf"],
     story:
       "ARPAN Tulsi Vana combines crushed holy basil leaves with herbal spice oils for an invigorating, germ-cleansing morning ritual.",
-    image: "/vedasakti_chandan.jpg",
+    image: "/products/tulsi-vana.jpg",
   },
   {
     slug: "kewra-ghar",
@@ -184,7 +186,7 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     notes: ["Kewra", "Pandan", "Sugarcane"],
     story:
       "Extracted from wild Ganjam Kewra flowers, ARPAN Kewra Ghar fills the room with festive sweetness for special guests.",
-    image: "/vedasakti_rose.jpg",
+    image: "/products/kewra-ghar.jpg",
   },
   {
     slug: "ganesh-utsav-kit",
@@ -202,7 +204,7 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     story:
       "The ARPAN Ganesh Utsav Kit comes in a luxury gold embossed box. Includes Nag Champa, Kapur Jyoti, Gulab Raj, solid brass incense burner, and pure kumkum.",
     badge: "Limited · Ganesh",
-    image: "/vedasakti_hero.jpg",
+    image: "/products/ganesh-utsav-kit.jpg",
   },
   {
     slug: "nitya-box",
@@ -220,7 +222,7 @@ const raw: Omit<Product, "sku" | "stock" | "active">[] = [
     story:
       "Receive 4 distinct ARPAN hand-rolled incense packs delivered to your doorstep every month with free brass holder samples.",
     badge: "Subscribe",
-    image: "/mysore_chandan_box.jpg",
+    image: "/products/nitya-box.jpg",
   },
 ];
 
@@ -317,8 +319,33 @@ export const reviews = [
   },
 ];
 
+export const ratings: Record<string, { score: number; n: number }> = {
+  "nag-champa-aarti": { score: 4.8, n: 86 },
+  "mysore-chandan": { score: 4.7, n: 54 },
+  "gulab-raj": { score: 4.8, n: 61 },
+  "loban-resin": { score: 4.6, n: 39 },
+  "mogra-raat": { score: 4.5, n: 28 },
+  "kapur-jyoti": { score: 4.7, n: 44 },
+  "tulsi-vana": { score: 4.6, n: 21 },
+  "kewra-ghar": { score: 4.5, n: 19 },
+  "ganesh-utsav-kit": { score: 4.9, n: 33 },
+  "nitya-box": { score: 4.8, n: 47 },
+  "oud-ruh": { score: 4.6, n: 16 },
+};
+
+export function productRating(slug: string) {
+  return ratings[slug] ?? { score: 4.6, n: 12 };
+}
+
 export function getProduct(slug: string, list: Product[] = products) {
   return list.find((p) => p.slug === slug);
+}
+
+export function productImage(slug?: string, image?: string) {
+  if (image?.includes(".svg") && slug) return `/products/${slug}.jpg`;
+  if (image && /\.(jpe?g|png|webp)(\?|$)/i.test(image)) return image;
+  if (slug) return `/products/${slug}.jpg`;
+  return "/products/nag-champa-aarti.jpg";
 }
 
 export function inr(n: number) {

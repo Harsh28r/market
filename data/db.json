@@ -22,9 +22,9 @@
       "story": "Dark wood smoke. Light one when the house should feel expensive.",
       "badge": "New lot",
       "sku": "ARP-OUD-RUH",
-      "stock": 40,
+      "stock": 39,
       "active": true,
-      "image": "/vedasakti_craft.jpg"
+      "image": "/products/oud-ruh.jpg"
     },
     {
       "slug": "nag-champa-aarti",
@@ -50,9 +50,9 @@
       "story": "Temple-grade nag champa without the cheap charcoal bite. Slow roll, thick cream smoke, the smell of a neighbourhood that still rings a bell at dusk.",
       "badge": "House staple",
       "sku": "ARP-1001",
-      "stock": 238,
+      "stock": 233,
       "active": true,
-      "image": "/nag_champa_box.jpg"
+      "image": "/products/nag-champa-aarti.jpg"
     },
     {
       "slug": "mysore-chandan",
@@ -80,7 +80,7 @@
       "sku": "ARP-1002",
       "stock": 86,
       "active": true,
-      "image": "/mysore_chandan_box.jpg"
+      "image": "/products/mysore-chandan.jpg"
     },
     {
       "slug": "gulab-raj",
@@ -108,7 +108,7 @@
       "sku": "ARP-1003",
       "stock": 120,
       "active": true,
-      "image": "/vedasakti_rose.jpg"
+      "image": "/products/gulab-raj.jpg"
     },
     {
       "slug": "loban-resin",
@@ -136,7 +136,7 @@
       "sku": "ARP-1004",
       "stock": 18,
       "active": true,
-      "image": "/vedasakti_craft.jpg"
+      "image": "/products/loban-resin.jpg"
     },
     {
       "slug": "mogra-raat",
@@ -163,7 +163,7 @@
       "sku": "ARP-1005",
       "stock": 64,
       "active": true,
-      "image": "/vedasakti_rose.jpg"
+      "image": "/products/mogra-raat.jpg"
     },
     {
       "slug": "kapur-jyoti",
@@ -190,7 +190,7 @@
       "sku": "ARP-1006",
       "stock": 200,
       "active": true,
-      "image": "/vedasakti_hero.jpg"
+      "image": "/products/kapur-jyoti.jpg"
     },
     {
       "slug": "tulsi-vana",
@@ -217,7 +217,7 @@
       "sku": "ARP-1007",
       "stock": 9,
       "active": true,
-      "image": "/vedasakti_chandan.jpg"
+      "image": "/products/tulsi-vana.jpg"
     },
     {
       "slug": "kewra-ghar",
@@ -244,7 +244,7 @@
       "sku": "ARP-1008",
       "stock": 41,
       "active": true,
-      "image": "/vedasakti_rose.jpg"
+      "image": "/products/kewra-ghar.jpg"
     },
     {
       "slug": "ganesh-utsav-kit",
@@ -270,9 +270,9 @@
       "story": "Nag champa for the daily aarti, kapur for the arti close, gulab for the last evening. Cotton wicks, a brass-look holder, and a small packet of sindoor. Ships in 24 hrs.",
       "badge": "Limited · Ganesh",
       "sku": "ARP-1009",
-      "stock": 32,
+      "stock": 31,
       "active": true,
-      "image": "/vedasakti_hero.jpg"
+      "image": "/products/ganesh-utsav-kit.jpg"
     },
     {
       "slug": "nitya-box",
@@ -300,10 +300,80 @@
       "sku": "ARP-1010",
       "stock": 400,
       "active": true,
-      "image": "/mysore_chandan_box.jpg"
+      "image": "/products/nitya-box.jpg"
     }
   ],
   "orders": [
+    {
+      "userId": "usr_mtqzd7vna2i4",
+      "customer": {
+        "name": "HARSH GUPTA",
+        "phone": "7822952756",
+        "address": "A-103 shiddhi vianayak Apt\nNaleshwar nagar nalasopara E",
+        "email": "harshgupta0028@gmail.com"
+      },
+      "pay": "cod",
+      "items": [
+        {
+          "slug": "oud-ruh",
+          "name": "Oud Ruh",
+          "price": 279,
+          "qty": 1
+        }
+      ],
+      "subtotal": 279,
+      "ship": 79,
+      "total": 358,
+      "id": "ARP-2412",
+      "createdAt": "2026-09-07T08:40:39.573Z",
+      "status": "placed"
+    },
+    {
+      "userId": "usr_mtqzd7vna2i4",
+      "customer": {
+        "name": "HARSH GUPTA",
+        "phone": "7822952756",
+        "address": "A-103 shiddhi vianayak Apt\nNaleshwar nagar nalasopara E",
+        "email": "harshgupta0028@gmail.com"
+      },
+      "pay": "cod",
+      "items": [
+        {
+          "slug": "nag-champa-aarti",
+          "name": "Nag Champa Aarti",
+          "price": 149,
+          "qty": 5
+        }
+      ],
+      "subtotal": 745,
+      "ship": 0,
+      "total": 745,
+      "id": "ARP-2411",
+      "createdAt": "2026-09-07T08:40:04.442Z",
+      "status": "placed"
+    },
+    {
+      "customer": {
+        "name": "HARSH GUPTA",
+        "phone": "917822952756",
+        "address": "A-103 shiddhi vianayak Apt\nNaleshwar nagar nalasopara E"
+      },
+      "pay": "upi",
+      "items": [
+        {
+          "slug": "ganesh-utsav-kit",
+          "name": "Ganesh Utsav Kit",
+          "price": 799,
+          "qty": 1
+        }
+      ],
+      "subtotal": 799,
+      "ship": 0,
+      "total": 799,
+      "id": "ARP-2410",
+      "createdAt": "2026-09-07T07:59:36.888Z",
+      "status": "placed"
+    },
     {
       "customer": {
         "name": "abhiLs2",
@@ -477,5 +547,33 @@
       "status": "delivered"
     }
   ],
-  "seq": 2410
+  "users": [
+    {
+      "email": "harshgupta0028@gmail.com",
+      "name": "HARSH GUPTA",
+      "phone": "7822952756",
+      "address": "A-103 shiddhi vianayak Apt\nNaleshwar nagar nalasopara E",
+      "emailVerified": true,
+      "id": "usr_mtqzd7vna2i4",
+      "createdAt": "2026-09-07T08:30:21.731Z"
+    }
+  ],
+  "otps": [
+    {
+      "email": "harshgupta0028@gmail.com",
+      "hash": "7b8fdf2b0d21584f6c2e6b606d3b4efc:b387f355f49577a8e5083c317c6b5203878e8e590f5ce0dc6c6b10c157bd170e5c42b2c2174d724ca08a26de727f4a0c6722568d77f42185cbad47f3e709f44b",
+      "exp": 1788770918017,
+      "attempts": 0,
+      "sentAt": 1788770318017,
+      "name": "HARSH GUPTA",
+      "phone": "7822952756"
+    }
+  ],
+  "seq": 2413,
+  "seo": {
+    "siteUrl": "https://arpandhupa.in",
+    "title": "Buy Agarbatti Online | Charcoal-Free Incense | ARPAN",
+    "description": "Buy charcoal-free agarbatti online from Nashik. Hand-rolled Nag Champa, Mysore Chandan, rose & loban dhoop. 40–50 min burn. COD across India.",
+    "keywords": "buy agarbatti online, charcoal free agarbatti, agarbatti online India, nag champa agarbatti, sandalwood incense sticks, dhoop sticks online, pooja incense, organic agarbatti, temple agarbatti, ARPAN agarbatti, charcoal free incense"
+  }
 }

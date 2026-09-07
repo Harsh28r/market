@@ -1,52 +1,90 @@
+import Link from "next/link";
 import { ArpanLogo } from "@/components/brand-logo";
+import { EMAIL, WHATSAPP_DISPLAY, whatsappHref } from "@/lib/site";
 
 export function Footer() {
   return (
     <footer className="mt-auto bg-ink text-ivory/80">
       <div className="gold-rule" />
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-4">
-        <div className="md:col-span-2">
+        <div>
           <ArpanLogo size="lg" />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-ivory/70">
-            Pure organic temple agarbatti & sacred aromas. 100% charcoal-free masala paste, hand-rolled with organic flowers, halmaddi resin, and pure essential oils in Nashik & Kannauj.
+            Hand-rolled charcoal-free agarbatti from Nashik. Temple smoke without the kirana chemical bite.
           </p>
         </div>
         <div>
           <p className="text-[11px] tracking-[0.2em] uppercase text-gold font-bold">
-            Explore Sacred Blends
+            Collections
           </p>
           <ul className="mt-4 space-y-2 text-sm">
             <li>
-              <Link href="/shop" className="hover:text-gold transition">
-                Full Catalog
+              <Link href="/shop?fam=sacred" className="hover:text-gold transition">
+                Agarbatti
+              </Link>
+            </li>
+            <li>
+              <Link href="/shop?fam=resin" className="hover:text-gold transition">
+                Dhoop &amp; Resin
+              </Link>
+            </li>
+            <li>
+              <Link href="/shop?fam=kit" className="hover:text-gold transition">
+                Combos
               </Link>
             </li>
             <li>
               <Link href="/rituals" className="hover:text-gold transition">
-                Shop by Ritual (पूजा)
-              </Link>
-            </li>
-            <li>
-              <Link href="/product/ganesh-utsav-kit" className="hover:text-gold transition">
-                Ganesh Kit
-              </Link>
-            </li>
-            <li>
-              <Link href="/product/nitya-box" className="hover:text-gold transition">
-                Nitya Monthly Box
+                Shop by pooja
               </Link>
             </li>
           </ul>
         </div>
         <div>
           <p className="text-[11px] tracking-[0.2em] uppercase text-gold font-bold">
-            ARPAN Concierge
+            Contact us
           </p>
           <ul className="mt-4 space-y-2 text-sm text-ivory/80">
-            <li>WhatsApp Order: +91 98765 43210</li>
-            <li>Cash on Delivery across India</li>
-            <li>Same-Day Dispatch (Nashik Lot)</li>
-            <li>hello@arpan.shop</li>
+            <li>
+              <a
+                href={whatsappHref("Namaste — I want to order Arpan agarbatti.")}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-gold transition"
+              >
+                ✆ {WHATSAPP_DISPLAY}
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${EMAIL}`} className="hover:text-gold transition">
+                ✉ {EMAIL}
+              </a>
+            </li>
+            <li>Nashik lot · COD across India</li>
+          </ul>
+        </div>
+        <div>
+          <p className="text-[11px] tracking-[0.2em] uppercase text-gold font-bold">
+            Policies
+          </p>
+          <ul className="mt-4 space-y-2 text-sm">
+            <li>
+              <Link href="/shipping" className="hover:text-gold transition">
+                Shipping
+              </Link>
+            </li>
+            <li>
+              <Link href="/returns" className="hover:text-gold transition">
+                Returns
+              </Link>
+            </li>
+            <li>
+              <Link href="/account" className="hover:text-gold transition">
+                My account
+              </Link>
+            </li>
+            <li>Free shipping over ₹499</li>
+            <li>UPI + Cash on delivery</li>
           </ul>
         </div>
       </div>

@@ -9,26 +9,10 @@ if (!fs.existsSync(dbPath)) {
 
 const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
 
-const imgMap = {
-  'nag-champa-aarti': '/nag_champa_box.jpg',
-  'mysore-chandan': '/mysore_chandan_box.jpg',
-  'gulab-raj': '/vedasakti_rose.jpg',
-  'loban-resin': '/vedasakti_craft.jpg',
-  'mogra-raat': '/vedasakti_rose.jpg',
-  'kapur-jyoti': '/vedasakti_hero.jpg',
-  'tulsi-vana': '/vedasakti_chandan.jpg',
-  'kewra-ghar': '/vedasakti_rose.jpg',
-  'ganesh-utsav-kit': '/vedasakti_hero.jpg',
-  'nitya-box': '/mysore_chandan_box.jpg',
-  'oud-ruh': '/vedasakti_craft.jpg'
-};
-
-db.products = db.products.map(p => {
-  return {
-    ...p,
-    image: imgMap[p.slug] || '/nag_champa_box.jpg'
-  };
-});
+db.products = db.products.map((p) => ({
+  ...p,
+  image: `/products/${p.slug}.jpg`,
+}));
 
 fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), 'utf8');
-console.log('Successfully updated db.json with real photography image paths!');
+console.log('Updated db.json product images to /products/{slug}.jpg');

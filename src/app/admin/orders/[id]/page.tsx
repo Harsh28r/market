@@ -84,6 +84,12 @@ export default function OrderDetailPage() {
           </p>
           <p className="mt-3 font-medium">{order.customer.name}</p>
           <p className="text-sm">{order.customer.phone}</p>
+          {order.customer.email && (
+            <p className="text-sm text-mist">{order.customer.email}</p>
+          )}
+          {order.userId && (
+            <p className="mt-1 text-[11px] tracking-wide text-mist">Account order</p>
+          )}
           <p className="mt-2 text-sm text-mist">{order.customer.address}</p>
           <a
             className="mt-4 inline-block text-[12px] text-ember"
