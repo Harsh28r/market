@@ -24,10 +24,10 @@ export function ShopGrid({ initial }: { initial?: Family | "all" }) {
             key={f.id}
             type="button"
             onClick={() => setFam(f.id)}
-            className={`shrink-0 px-4 py-2.5 text-[12px] tracking-[0.14em] uppercase ${
+            className={`shrink-0 px-4 py-2.5 text-[12px] tracking-[0.14em] uppercase transition ${
               fam === f.id
-                ? "bg-ink text-ivory"
-                : "border border-ink/15 hover:border-saffron"
+                ? "bg-ink text-ivory shadow-[0_12px_24px_-12px_rgba(18,7,10,0.6)]"
+                : "border border-gold/25 hover:border-saffron"
             }`}
           >
             {f.label}

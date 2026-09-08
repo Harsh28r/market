@@ -22,8 +22,8 @@ export function ProductArt({
 
   return (
     <div
-      className={`relative overflow-hidden bg-ink border border-gold/30 group ${
-        compact ? "rounded-xs shadow-xs" : "rounded-sm shadow-md"
+      className={`relative overflow-hidden bg-ink group ${
+        compact ? "border border-gold/30 shadow-xs" : "gold-frame"
       } ${className}`}
     >
       <Image
@@ -31,8 +31,9 @@ export function ProductArt({
         alt={alt}
         fill
         sizes={compact ? "160px" : "(min-width: 768px) 33vw, 50vw"}
-        className="object-cover object-center transition duration-500 group-hover:scale-[1.04]"
+        className="object-cover object-center transition duration-700 group-hover:scale-[1.07]"
       />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-ink/45 via-transparent to-transparent opacity-80" />
       {!compact && hindiName && <span className="sr-only">{hindiName}</span>}
     </div>
   );

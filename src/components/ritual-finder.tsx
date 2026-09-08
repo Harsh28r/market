@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ProductArt } from "@/components/product-art";
+import { SmokeField } from "@/components/smoke-field";
 import { useCatalog } from "@/context/catalog";
 import { getProduct, inr, rituals } from "@/lib/products";
 
@@ -19,17 +20,15 @@ export function RitualFinder() {
   );
 
   return (
-    <section className="bg-ink px-5 py-20 text-ivory">
-      <div className="mx-auto max-w-6xl">
-        <p className="text-[11px] tracking-[0.28em] uppercase text-gold">
-          Creative sell · start from the pooja, not the SKU
-        </p>
-        <h2 className="font-display mt-3 max-w-2xl text-3xl leading-tight md:text-5xl">
+    <section className="chamber relative overflow-hidden px-5 py-20 text-ivory">
+      <SmokeField count={28} origin="center" />
+      <div className="relative mx-auto max-w-6xl">
+        <p className="kicker text-gold">Start from the pooja, not the SKU</p>
+        <h2 className="font-display mt-3 max-w-2xl text-3xl leading-tight md:text-6xl">
           What are you lighting for?
         </h2>
         <p className="mt-3 max-w-xl text-ivory/60">
-          Pick the ritual. We’ll put the right smoke in the tray — no 40-pack
-          guesswork at the kirana.
+          Pick the ritual. We’ll put the right smoke in the tray — no 40-pack guesswork at the kirana.
         </p>
         <div className="-mx-5 mt-8 flex gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
           {rituals.map((r) => (
@@ -39,7 +38,7 @@ export function RitualFinder() {
               onClick={() => setId(r.id)}
               className={`shrink-0 border px-4 py-2.5 text-[12px] tracking-[0.12em] uppercase transition ${
                 id === r.id
-                  ? "border-saffron bg-saffron text-ink"
+                  ? "border-saffron bg-saffron text-ink shadow-[0_0_24px_rgba(212,160,23,0.45)]"
                   : "border-ivory/20 text-ivory/80 hover:border-gold"
               }`}
             >
@@ -49,8 +48,8 @@ export function RitualFinder() {
         </div>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
           <div>
-            <p className="font-deva text-2xl text-gold">{ritual.hindi}</p>
-            <p className="mt-2 text-lg text-ivory/80">{ritual.blurb}</p>
+            <p className="font-deva text-3xl text-gold">{ritual.hindi}</p>
+            <p className="mt-3 text-lg text-ivory/80">{ritual.blurb}</p>
             <Link
               href="/rituals"
               className="mt-6 inline-block text-[12px] tracking-[0.18em] uppercase text-gold underline-offset-4 hover:underline"
@@ -63,7 +62,7 @@ export function RitualFinder() {
               <li key={p.slug}>
                 <Link
                   href={`/product/${p.slug}`}
-                  className="flex gap-4 border border-ivory/10 bg-ivory/[0.03] p-3 transition hover:border-gold/50"
+                  className="flex gap-4 border border-gold/20 bg-ivory/[0.04] p-3 transition hover:border-gold/60 hover:bg-ivory/[0.07]"
                 >
                   <ProductArt
                     slug={p.slug}

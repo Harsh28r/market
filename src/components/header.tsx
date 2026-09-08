@@ -23,7 +23,7 @@ export function Header() {
   const accountLabel = user ? user.name.split(" ")[0] : "Login";
 
   return (
-    <header className="sticky top-0 z-40 border-b border-gold/20 bg-ink/90 text-ivory backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-gold/25 bg-ink/75 text-ivory shadow-[0_12px_40px_rgba(18,7,10,0.35)] backdrop-blur-xl">
       <div className="flex items-center justify-center bg-linear-to-r from-saffron via-gold to-saffron px-3 py-1.5 text-center text-[10px] font-semibold tracking-wider uppercase text-ink shadow-xs sm:px-4 sm:text-[11px]">
         <span className="sm:hidden">Free ship over ₹499 · Charcoal-free</span>
         <span className="hidden sm:inline">
@@ -68,7 +68,7 @@ export function Header() {
           </Link>
           <Link
             href="/cart"
-            className="relative flex items-center gap-1.5 rounded border border-gold/30 bg-ink/50 px-2.5 py-1.5 text-[11px] tracking-[0.16em] uppercase text-ivory hover:border-gold hover:text-gold transition sm:gap-2 sm:px-3.5 sm:text-[12px]"
+            className="relative flex items-center gap-1.5 border border-gold/35 bg-gold/10 px-2.5 py-1.5 text-[11px] tracking-[0.16em] uppercase text-ivory shadow-[0_0_20px_rgba(232,201,106,0.15)] transition hover:border-gold hover:text-gold sm:gap-2 sm:px-3.5 sm:text-[12px]"
           >
             <span>Cart</span>
             {count > 0 && (

@@ -17,10 +17,8 @@ export default async function RitualsPage() {
   const catalog = await listProducts({ activeOnly: true });
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-5 sm:py-14">
-      <p className="text-[11px] tracking-[0.28em] uppercase text-ember">
-        Merchandizing
-      </p>
-      <h1 className="font-display mt-2 text-4xl leading-tight sm:text-5xl">Shop the pooja, not the aisle</h1>
+      <p className="kicker text-ember">Merchandizing</p>
+      <h1 className="font-display mt-2 text-4xl leading-tight sm:text-6xl">Shop the pooja, not the aisle</h1>
       <p className="mt-3 max-w-xl text-mist">
         People don’t wake up wanting “SKU-04 rose 35 sticks.” They want Friday
         to smell like Lakshmi showed up.

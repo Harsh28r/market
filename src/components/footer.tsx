@@ -4,7 +4,10 @@ import { EMAIL, INSTAGRAM, INSTAGRAM_URL, WHATSAPP_DISPLAY, whatsappHref } from 
 
 export function Footer() {
   return (
-    <footer className="mt-auto bg-ink text-ivory/80">
+    <footer className="relative mt-auto overflow-hidden bg-ink text-ivory/80">
+      <div className="pointer-events-none absolute -left-8 bottom-0 font-deva text-[10rem] leading-none text-gold/5">
+        अर्पण
+      </div>
       <div className="gold-rule" />
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-4">
         <div>

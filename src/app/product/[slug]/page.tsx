@@ -51,22 +51,25 @@ export default async function ProductPage({ params }: Props) {
       />
       <Link
         href="/shop"
-        className="text-[11px] tracking-[0.16em] uppercase text-mist"
+        className="text-[11px] tracking-[0.16em] uppercase text-mist hover:text-ember"
       >
         ← Shop
       </Link>
-      <div className="mt-6 grid gap-10 md:grid-cols-2">
-        <ProductArt
-          slug={p.slug}
-          scent={p.scent}
-          image={p.image}
-          productName={p.name}
-          hindiName={p.hindi}
-          className="min-h-[280px] w-full rounded border border-gold/30 shadow-md sm:min-h-[380px] md:min-h-[480px]"
-        />
+      <div className="mt-6 grid gap-10 md:grid-cols-2 md:items-start">
+        <div className="relative overflow-hidden bg-ink p-3 md:p-4">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(232,201,106,0.18),transparent_55%)]" />
+          <ProductArt
+            slug={p.slug}
+            scent={p.scent}
+            image={p.image}
+            productName={p.name}
+            hindiName={p.hindi}
+            className="relative min-h-[320px] w-full sm:min-h-[420px] md:min-h-[560px]"
+          />
+        </div>
         <div>
-          <p className="font-deva text-ember">{p.hindi}</p>
-          <h1 className="font-display mt-1 text-4xl leading-tight sm:text-5xl">{p.name}</h1>
+          <p className="font-deva text-xl text-ember">{p.hindi}</p>
+          <h1 className="font-display mt-1 text-4xl leading-tight sm:text-6xl">{p.name}</h1>
           <div className="mt-3">
             <Stars score={rating.score} n={rating.n} />
           </div>
@@ -87,7 +90,7 @@ export default async function ProductPage({ params }: Props) {
               ["Stick length", "10 inch (approx)"],
               ["Charcoal", "0% · masala paste"],
             ].map(([k, v]) => (
-              <div key={k} className="border border-ink/10 bg-ivory px-3 py-2">
+              <div key={k} className="border border-gold/20 bg-ivory/80 px-3 py-2">
                 <dt className="text-[10px] tracking-[0.16em] uppercase text-mist">{k}</dt>
                 <dd className="mt-0.5 font-medium">{v}</dd>
               </div>
@@ -128,7 +131,7 @@ export default async function ProductPage({ params }: Props) {
               disabled={out}
               picker
               label={out ? "Sold out" : "ADD"}
-              className="bg-ink px-8 py-4 text-[12px] tracking-[0.2em] uppercase text-ivory hover:bg-wine disabled:opacity-40"
+              className="btn-gold w-full sm:w-auto disabled:opacity-40"
             />
             <a
               href={whatsappHref(
