@@ -36,11 +36,13 @@ export function SmokeField({
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = ref.current;
-    if (!canvas) return;
+    const node = ref.current;
+    if (!node) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const ctx = canvas.getContext("2d", { alpha: true });
-    if (!ctx) return;
+    const gfx = node.getContext("2d", { alpha: true });
+    if (!gfx) return;
+    const canvas: HTMLCanvasElement = node;
+    const ctx: CanvasRenderingContext2D = gfx;
 
     let w = 0;
     let h = 0;
