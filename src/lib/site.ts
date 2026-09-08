@@ -8,6 +8,7 @@ export const SHIP_FEE = 79;
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://arpandhupa.in";
 export const BRAND = "ARPAN";
+export const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID?.trim() || "yf4ed2b2u1";
 export const DEFAULT_SEO = {
   title: "Buy Agarbatti Online | Charcoal-Free Incense | ARPAN",
   description:
