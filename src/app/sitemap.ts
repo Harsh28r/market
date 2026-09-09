@@ -10,6 +10,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     { url: base, lastModified: now, changeFrequency: "daily", priority: 1 },
     { url: `${base}/shop`, lastModified: now, changeFrequency: "daily", priority: 0.9 },
+    { url: `${base}/shop?fam=sacred`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${base}/shop?fam=floral`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${base}/shop?fam=woody`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${base}/shop?fam=resin`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${base}/shop?fam=kit`, lastModified: now, changeFrequency: "weekly", priority: 0.75 },
     { url: `${base}/rituals`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${base}/shipping`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${base}/returns`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },

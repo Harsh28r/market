@@ -6,7 +6,7 @@ import { useAuth } from "@/context/auth";
 import { useCart } from "@/context/cart";
 
 import { ArpanLogo } from "@/components/brand-logo";
-import { INSTAGRAM_URL, whatsappHref } from "@/lib/site";
+import { whatsappHref } from "@/lib/site";
 
 const links = [
   { href: "/shop", label: "Shop" },
@@ -23,12 +23,10 @@ export function Header() {
   const accountLabel = user ? user.name.split(" ")[0] : "Login";
 
   return (
-    <header className="sticky top-0 z-40 border-b border-gold/25 bg-ink/75 text-ivory shadow-[0_12px_40px_rgba(18,7,10,0.35)] backdrop-blur-xl">
-      <div className="flex items-center justify-center bg-linear-to-r from-saffron via-gold to-saffron px-3 py-1.5 text-center text-[10px] font-semibold tracking-wider uppercase text-ink shadow-xs sm:px-4 sm:text-[11px]">
-        <span className="sm:hidden">Free ship over ₹499 · Charcoal-free</span>
-        <span className="hidden sm:inline">
-          ⭐ Free shipping over ₹499 · Charcoal-free puja incense · Festival kits
-        </span>
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/92 text-ivory backdrop-blur-xl">
+      <div className="flex items-center justify-center border-b border-white/10 bg-ink px-3 py-1.5 text-center text-[10px] font-medium tracking-[0.18em] uppercase text-gold/80 sm:px-4 sm:text-[11px]">
+        <span className="sm:hidden">Free ship ₹499 · 0% charcoal</span>
+        <span className="hidden sm:inline">Free shipping over ₹499 · Charcoal-free masala · Nashik dispatch 24h</span>
       </div>
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2.5 sm:px-5 sm:py-3">
         <ArpanLogo size="sm" className="min-w-0" />
@@ -45,14 +43,6 @@ export function Header() {
         </nav>
         <div className="flex shrink-0 items-center gap-3 sm:gap-5">
           <a
-            href={INSTAGRAM_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="hidden text-[11px] tracking-[0.14em] uppercase text-ivory/80 hover:text-gold md:inline"
-          >
-            Instagram
-          </a>
-          <a
             href={whatsappHref("Namaste — I want to order Arpan agarbatti.")}
             target="_blank"
             rel="noreferrer"
@@ -68,7 +58,7 @@ export function Header() {
           </Link>
           <Link
             href="/cart"
-            className="relative flex items-center gap-1.5 border border-gold/35 bg-gold/10 px-2.5 py-1.5 text-[11px] tracking-[0.16em] uppercase text-ivory shadow-[0_0_20px_rgba(232,201,106,0.15)] transition hover:border-gold hover:text-gold sm:gap-2 sm:px-3.5 sm:text-[12px]"
+            className="relative flex items-center gap-1.5 border border-white/20 px-2.5 py-1.5 text-[11px] tracking-[0.16em] uppercase text-ivory transition hover:border-gold hover:text-gold sm:gap-2 sm:px-3.5 sm:text-[12px]"
           >
             <span>Cart</span>
             {count > 0 && (
@@ -105,12 +95,12 @@ export function Header() {
             </Link>
           ))}
           <a
-            href={INSTAGRAM_URL}
+            href={whatsappHref("Namaste — I want to order Arpan agarbatti.")}
             target="_blank"
             rel="noreferrer"
-            className="text-ivory/80 hover:text-gold py-2.5"
+            className="text-gold hover:text-saffron py-2.5"
           >
-            Instagram
+            WhatsApp order
           </a>
           <Link
             href={accountHref}

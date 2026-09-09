@@ -114,6 +114,14 @@ export const landingFaqs = [
     q: "What fragrances can I buy?",
     a: "Nag Champa Aarti, Mysore Chandan, Gulab Raj rose, Loban resin dhoop, Mogra, Tulsi, Kewra, plus Ganesh utsav kits and the Nitya monthly box.",
   },
+  {
+    q: "How do I order ARPAN agarbatti?",
+    a: "Add packs to the aarti tray on the site, or WhatsApp the pack name. Pay COD or UPI. Nashik dispatch in 24 hours to any Indian pin code.",
+  },
+  {
+    q: "What if sticks break in transit?",
+    a: "WhatsApp a photo within 48 hours. We replace the lot. See the returns page — no restocking fee on damaged incense.",
+  },
 ];
 
 export function landingJsonLd(seo: SiteSeo, productUrls: { name: string; url: string }[]) {
@@ -126,10 +134,17 @@ export function landingJsonLd(seo: SiteSeo, productUrls: { name: string; url: st
       url: seo.siteUrl,
       description: seo.description,
       inLanguage: "en-IN",
-      potentialAction: {
-        "@type": "CommunicateAction",
-        target: `https://wa.me/91${WHATSAPP}`,
-      },
+      potentialAction: [
+        {
+          "@type": "CommunicateAction",
+          name: "Order on WhatsApp",
+          target: `https://wa.me/91${WHATSAPP}`,
+        },
+        {
+          "@type": "ReadAction",
+          target: absUrl("/shop", seo.siteUrl),
+        },
+      ],
     },
     {
       "@context": "https://schema.org",
@@ -193,12 +208,18 @@ export function productJsonLd(p: Product, base = SITE_URL) {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: p.name,
+    name: p.family === "kit" ? p.name : `${p.name} Agarbatti`,
     description: productSeoDescription(p),
     image: [absUrl(productImage(p.slug, p.image), base)],
     sku: p.sku,
+    mpn: p.sku,
     brand: { "@type": "Brand", name: BRAND },
-    category: "Incense",
+    category: "Incense Sticks",
+    additionalProperty: [
+      { "@type": "PropertyValue", name: "Charcoal", value: "0%" },
+      { "@type": "PropertyValue", name: "Burn time", value: p.burn },
+      { "@type": "PropertyValue", name: "Origin", value: "Nashik, India" },
+    ],
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: score,
@@ -213,6 +234,17 @@ export function productJsonLd(p: Product, base = SITE_URL) {
       availability: p.stock > 0 && p.active
         ? "https://schema.org/InStock"
         : "https://schema.org/OutOfStock",
+      itemCondition: "https://schema.org/NewCondition",
+      seller: { "@type": "Organization", name: BRAND, url: base },
+      areaServed: { "@type": "Country", name: "India" },
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "IN",
+        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: 7,
+        returnMethod: "https://schema.org/ReturnByMail",
+        returnFees: "https://schema.org/FreeReturn",
+      },
     },
   };
 }

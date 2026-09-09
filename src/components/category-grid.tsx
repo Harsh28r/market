@@ -44,7 +44,7 @@ export function CategoryGrid() {
           <Link
             key={c.href}
             href={c.href}
-            className="shine-sweep lift-card group relative min-h-[280px] overflow-hidden border border-gold/20"
+            className="group relative min-h-[240px] overflow-hidden border border-ink/10 sm:min-h-[300px]"
           >
             <Image
               src={c.img}

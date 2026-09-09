@@ -8,6 +8,8 @@ import { CategoryGrid } from "@/components/category-grid";
 import { FestivalBanner } from "@/components/festival-banner";
 import { ProcessSteps } from "@/components/process-steps";
 import { RitualFinder } from "@/components/ritual-finder";
+import { ScentMarquee } from "@/components/scent-marquee";
+import { FestivalPulse } from "@/components/festival-pulse";
 import { ScentChamber } from "@/components/scent-chamber";
 import { JsonLd } from "@/components/json-ld";
 import { LotusRule } from "@/components/ornament";
@@ -56,18 +58,20 @@ export default async function Home() {
         <JsonLd key={i} data={block} />
       ))}
       <HeroSanctum />
+      <ScentMarquee />
+      <FestivalPulse />
 
-      <section className="relative z-10 -mt-6 border-y border-gold/25 bg-ivory/90 shadow-[0_-30px_80px_rgba(18,7,10,0.35)] backdrop-blur-md">
-        <ul className="mx-auto grid max-w-6xl grid-cols-2 divide-x divide-y divide-gold/15 md:grid-cols-4 md:divide-y-0">
+      <section className="relative z-10 border-y border-white/10 bg-ink text-ivory">
+        <ul className="mx-auto grid max-w-6xl grid-cols-2 divide-x divide-y divide-white/10 md:grid-cols-4 md:divide-y-0">
           {[
             ["Hand-rolled", "Masala paste, not charcoal dip"],
             ["Charcoal-free", "Clean cream smoke, no cough"],
             ["40–50 min burn", "Longer than kirana sticks"],
             ["Free ship ₹499", "Brass holder included too"],
           ].map(([t, s]) => (
-            <li key={t} className="px-5 py-7 text-center md:text-left">
-              <p className="text-[12px] tracking-[0.18em] uppercase font-bold text-ink">{t}</p>
-              <p className="mt-1 text-sm text-mist">{s}</p>
+            <li key={t} className="px-5 py-6 text-center md:py-8 md:text-left">
+              <p className="text-[11px] tracking-[0.2em] uppercase font-bold text-gold">{t}</p>
+              <p className="mt-1 text-sm text-ivory/55">{s}</p>
             </li>
           ))}
         </ul>
@@ -84,35 +88,33 @@ export default async function Home() {
         </p>
       </section>
 
-      {/* Shop by Category */}
       <CategoryGrid />
 
-      <ScentChamber />
-
-      <RitualFinder />
-
-      {/* Product Catalog Showcase */}
-      <section className="mx-auto max-w-6xl px-5 py-20">
+      <section className="mx-auto max-w-6xl px-5 py-14 sm:py-20">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <p className="kicker text-ember">Devotees’ favourite</p>
-            <h2 className="font-display mt-2 text-3xl sm:text-4xl md:text-5xl">Best-sellers</h2>
-            <p className="mt-2 text-sm text-mist">Hand-rolled purity, crafted for aarti.</p>
+            <p className="kicker text-ember">Order today</p>
+            <h2 className="font-display mt-2 text-3xl sm:text-4xl md:text-5xl">Best-selling agarbatti</h2>
+            <p className="mt-2 text-sm text-mist">Hand-rolled. COD India. Nashik pack in 24 hrs.</p>
             <LotusRule className="mt-5 max-w-36" />
           </div>
           <Link
             href="/shop"
-            className="hidden text-[12px] tracking-[0.18em] uppercase font-bold text-ember hover:text-ink md:inline transition"
+            className="shrink-0 text-[12px] tracking-[0.18em] uppercase font-bold text-ember hover:text-ink transition"
           >
-            View all →
+            Shop all →
           </Link>
         </div>
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-6 sm:mt-12 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
           {featured.map((p) => (
             <ProductCard key={p.slug} product={p} />
           ))}
         </div>
       </section>
+
+      <ScentChamber />
+
+      <RitualFinder />
 
       {fresh.length > 0 && (
         <section className="mx-auto max-w-6xl px-5 pb-20">
@@ -140,7 +142,7 @@ export default async function Home() {
           </span>
         </div>
         <div className="mx-auto grid max-w-6xl md:grid-cols-2">
-          <div className="relative min-h-[420px] md:min-h-[560px]">
+          <div className="relative min-h-[260px] sm:min-h-[420px] md:min-h-[560px]">
             <Image
               src="/vedasakti_craft.jpg"
               alt="ARPAN Traditional Incense Masala Hand-Rolling Craft"
@@ -169,7 +171,7 @@ export default async function Home() {
 
       {/* Featured Sets */}
       <section className="mx-auto grid max-w-6xl gap-8 px-5 py-20 md:grid-cols-2">
-        <article className="grain gold-frame relative overflow-hidden bg-ink p-5 text-ivory sm:p-8 md:min-h-[440px]">
+        <article className="relative overflow-hidden bg-ink p-5 text-ivory sm:p-8 md:min-h-[440px]">
           <Image
             src={kit.image || `/products/${kit.slug}.jpg`}
             alt={kit.name}
@@ -203,7 +205,7 @@ export default async function Home() {
           </div>
           </div>
         </article>
-        <article className="gold-frame relative overflow-hidden border border-ink/10 bg-ivory p-5 sm:p-8 md:min-h-[440px]">
+        <article className="relative overflow-hidden border border-ink/10 bg-ivory p-5 sm:p-8 md:min-h-[440px]">
           <Image
             src={box.image || `/products/${box.slug}.jpg`}
             alt={box.name}
@@ -242,7 +244,7 @@ export default async function Home() {
         <h2 className="font-display mt-2 text-3xl sm:text-4xl">Agarbatti online — common questions</h2>
         <dl className="mt-10 grid gap-6 md:grid-cols-2">
           {landingFaqs.map((f) => (
-            <div key={f.q} className="lift-card border border-gold/20 bg-ivory/80 p-6 shadow-[0_20px_50px_-32px_rgba(18,7,10,0.45)]">
+            <div key={f.q} className="border border-ink/10 bg-ivory p-6">
               <dt className="font-display text-2xl leading-snug">{f.q}</dt>
               <dd className="mt-3 text-sm leading-relaxed text-mist">{f.a}</dd>
             </div>
@@ -281,7 +283,7 @@ export default async function Home() {
         </h2>
         <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
           <Link href="/shop" className="btn-gold">
-            Explore the catalog
+            Order agarbatti
           </Link>
           <Link href="/rituals" className="btn-ghost">
             Select your pooja

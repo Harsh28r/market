@@ -104,9 +104,15 @@ export default function CartPage() {
             )}
             <Link
               href={user ? "/checkout" : "/login?next=/checkout"}
-              className="mt-6 block bg-ink py-3 text-center text-[12px] tracking-[0.18em] uppercase text-ivory"
+              className="mt-6 hidden bg-ink py-3 text-center text-[12px] tracking-[0.18em] uppercase text-ivory md:block"
             >
               {user ? "Checkout" : "Verify email to checkout"}
+            </Link>
+            <Link
+              href={user ? "/checkout" : "/login?next=/checkout"}
+              className="buy-bar justify-center text-[12px] font-bold tracking-[0.18em] uppercase text-ivory md:hidden"
+            >
+              {user ? `Pay ${inr(total)} · Checkout` : "Verify email to checkout"}
             </Link>
             {!user && (
               <p className="mt-3 text-center text-xs text-mist">

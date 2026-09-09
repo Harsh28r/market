@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToCart } from "@/components/add-to-cart";
+import { BuyBar } from "@/components/buy-bar";
 import { ProductArt } from "@/components/product-art";
 import { ProductCard } from "@/components/product-card";
 import { Stars } from "@/components/stars";
@@ -37,7 +38,7 @@ export default async function ProductPage({ params }: Props) {
   const rating = productRating(p.slug);
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-5 sm:py-12">
+    <main className="mx-auto w-full max-w-6xl px-4 py-8 pb-32 sm:px-5 sm:py-12 md:pb-12">
       <JsonLd data={productJsonLd(p, seo.siteUrl)} />
       <JsonLd
         data={breadcrumbJsonLd(
@@ -56,8 +57,7 @@ export default async function ProductPage({ params }: Props) {
         ← Shop
       </Link>
       <div className="mt-6 grid gap-10 md:grid-cols-2 md:items-start">
-        <div className="relative overflow-hidden bg-ink p-3 md:p-4">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(232,201,106,0.18),transparent_55%)]" />
+        <div className="relative overflow-hidden bg-ink">
           <ProductArt
             slug={p.slug}
             scent={p.scent}
@@ -69,7 +69,9 @@ export default async function ProductPage({ params }: Props) {
         </div>
         <div>
           <p className="font-deva text-xl text-ember">{p.hindi}</p>
-          <h1 className="font-display mt-1 text-4xl leading-tight sm:text-6xl">{p.name}</h1>
+          <h1 className="font-display mt-1 text-4xl leading-tight sm:text-6xl">
+            {p.family === "kit" ? p.name : `${p.name} Agarbatti`}
+          </h1>
           <div className="mt-3">
             <Stars score={rating.score} n={rating.n} />
           </div>
@@ -130,7 +132,7 @@ export default async function ProductPage({ params }: Props) {
               slug={p.slug}
               disabled={out}
               picker
-              label={out ? "Sold out" : "ADD"}
+              label={out ? "Sold out" : "Add to tray"}
               className="btn-gold w-full sm:w-auto disabled:opacity-40"
             />
             <a
@@ -159,6 +161,7 @@ export default async function ProductPage({ params }: Props) {
           </div>
         </div>
       </div>
+      <BuyBar slug={p.slug} name={p.name} price={p.price} out={out} />
       {related.length > 0 && (
         <section className="mt-20">
           <h2 className="font-display text-3xl">Burns well with</h2>

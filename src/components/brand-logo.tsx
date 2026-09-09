@@ -29,7 +29,7 @@ export function ArpanLogo({
     <Link href="/" className={`inline-flex items-center gap-3 group ${className}`}>
       {/* Luxury Golden Emblem - Sacred Flame & Incense Lotus Motif */}
       <div
-        className={`relative flex ${iconSizes[size]} items-center justify-center rounded-full border border-gold/70 bg-linear-to-b from-gold/25 via-ink to-ink p-1.5 shadow-md group-hover:border-gold group-hover:scale-105 transition duration-300`}
+        className={`relative flex ${iconSizes[size]} items-center justify-center border border-gold/40 p-1.5 transition duration-300 group-hover:border-gold`}
       >
         <svg
           viewBox="0 0 24 24"

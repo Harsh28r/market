@@ -1,12 +1,7 @@
 export function LotusRule({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex items-center gap-3 ${className}`} aria-hidden>
-      <span className="gold-rule flex-1" />
-      <svg viewBox="0 0 32 16" className="h-4 w-8 shrink-0 text-gold" fill="currentColor">
-        <path d="M16 14c-2.2-3.4-6.8-5.5-10.5-6.2 3.4-1.2 6.6-3.6 8.2-7.3 1.6 3.7 4.8 6.1 8.2 7.3C22.8 8.5 18.2 10.6 16 14Z" opacity="0.9" />
-        <circle cx="16" cy="8.2" r="1.4" />
-      </svg>
-      <span className="gold-rule flex-1" />
+    <div className={`flex items-center ${className}`} aria-hidden>
+      <span className="h-px w-full bg-linear-to-r from-gold/70 via-gold/20 to-transparent" />
     </div>
   );
 }

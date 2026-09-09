@@ -16,7 +16,7 @@ export function FestivalBanner() {
             One box for the 10-day house, not six kirana runs. Free shipping over ₹499.
           </p>
         </div>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
           <Link href="/product/ganesh-utsav-kit" className="btn-gold !px-6 !py-3">
             Shop festive kit
           </Link>
