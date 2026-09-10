@@ -13,6 +13,11 @@ import { EMAIL, WHATSAPP_DISPLAY, whatsappHref } from "@/lib/site";
 import { findProduct, getSeo, listProducts } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
+export const dynamicParams = true;
+
+export function generateStaticParams() {
+  return [];
+}
 
 type Props = { params: Promise<{ slug: string }> };
 

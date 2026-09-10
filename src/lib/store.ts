@@ -3,7 +3,7 @@ import path from "path";
 import { MongoServerError, type Collection, type Document } from "mongodb";
 import { products as seedProducts, type Product } from "@/lib/products";
 import { defaultSiteSeo, type SiteSeo } from "@/lib/seo";
-import { getDb } from "@/lib/mongo";
+import { canUseMongo, getDb } from "@/lib/mongo";
 
 export type OrderStatus =
   | "placed"
@@ -166,16 +166,32 @@ async function bootOnce() {
   );
 }
 
+function seedList(activeOnly?: boolean) {
+  return activeOnly ? seedProducts.filter((p) => p.active) : seedProducts;
+}
+
 export async function listProducts(opts?: { activeOnly?: boolean }) {
-  const products = await col<Product & { _id: string }>("products");
-  const list = (await products.find().toArray()).map((p) => omitId(p) as Product);
-  return opts?.activeOnly ? list.filter((p) => p.active) : list;
+  if (!canUseMongo()) return seedList(opts?.activeOnly);
+  try {
+    const products = await col<Product & { _id: string }>("products");
+    const list = (await products.find().toArray()).map((p) => omitId(p) as Product);
+    return opts?.activeOnly ? list.filter((p) => p.active) : list;
+  } catch (err) {
+    console.error("[store] listProducts fallback to seed", err);
+    return seedList(opts?.activeOnly);
+  }
 }
 
 export async function findProduct(slug: string) {
-  const products = await col<Product & { _id: string }>("products");
-  const doc = await products.findOne({ slug });
-  return doc ? (omitId(doc) as Product) : undefined;
+  if (!canUseMongo()) return seedProducts.find((p) => p.slug === slug);
+  try {
+    const products = await col<Product & { _id: string }>("products");
+    const doc = await products.findOne({ slug });
+    return doc ? (omitId(doc) as Product) : undefined;
+  } catch (err) {
+    console.error("[store] findProduct fallback to seed", err);
+    return seedProducts.find((p) => p.slug === slug);
+  }
 }
 
 export async function upsertProduct(product: Product, prevSlug?: string) {
@@ -208,6 +224,7 @@ export async function removeProduct(slug: string) {
 }
 
 export async function listOrders() {
+  if (!canUseMongo()) return [];
   const orders = await col<Order & { _id: string }>("orders");
   return (await orders.find().sort({ createdAt: -1 }).toArray()).map(
     (o) => omitId(o) as Order,
@@ -274,9 +291,15 @@ export async function setOrderStatus(id: string, status: OrderStatus) {
 }
 
 export async function getSeo(): Promise<SiteSeo> {
-  const meta = await col<MetaSeo>("meta");
-  const doc = await meta.findOne({ _id: "seo" });
-  return { ...defaultSiteSeo, ...omitId(doc ?? { _id: "seo" }) };
+  if (!canUseMongo()) return defaultSiteSeo;
+  try {
+    const meta = await col<MetaSeo>("meta");
+    const doc = await meta.findOne({ _id: "seo" });
+    return { ...defaultSiteSeo, ...omitId(doc ?? { _id: "seo" }) };
+  } catch (err) {
+    console.error("[store] getSeo fallback to defaults", err);
+    return defaultSiteSeo;
+  }
 }
 
 export async function saveSeo(patch: Partial<SiteSeo>): Promise<SiteSeo> {
@@ -288,6 +311,7 @@ export async function saveSeo(patch: Partial<SiteSeo>): Promise<SiteSeo> {
 }
 
 export async function listUsers(): Promise<PublicUser[]> {
+  if (!canUseMongo()) return [];
   const users = await col<User & { _id: string }>("users");
   return (await users.find().toArray()).map((u) => toPublicUser(omitId(u) as User));
 }

@@ -3,7 +3,6 @@ import { JsonLd } from "@/components/json-ld";
 import { ShopGrid } from "@/components/shop-grid";
 import { families, type Family } from "@/lib/products";
 import { absUrl } from "@/lib/seo";
-import { BRAND } from "@/lib/site";
 import { getSeo, listProducts } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
@@ -13,32 +12,16 @@ function famFrom(raw?: string): Family | "all" {
   return "all";
 }
 
-export async function generateMetadata({
-  searchParams,
-}: {
-  searchParams: Promise<{ fam?: string }>;
-}): Promise<Metadata> {
-  const { fam } = await searchParams;
-  const initial = famFrom(fam);
-  if (initial === "all") {
-    return {
-      title: "Shop Agarbatti Online | Charcoal-Free Incense & Dhoop",
-      description:
-        "Buy hand-rolled charcoal-free agarbatti online. Nag Champa, Mysore Chandan, Gulab Raj, Loban dhoop, pooja kits. COD across India.",
-      alternates: { canonical: "/shop" },
-      openGraph: {
-        title: "Shop ARPAN Agarbatti",
-        description: "Charcoal-free temple incense. 40–50 min burn. Nashik packed.",
-      },
-    };
-  }
-  const label = families.find((f) => f.id === initial)?.label ?? "Agarbatti";
-  return {
-    title: `${label} Agarbatti Online | Charcoal-Free | ${BRAND}`,
-    description: `Buy ${label.toLowerCase()} charcoal-free agarbatti online from Nashik. Hand-rolled masala, COD + UPI across India.`,
-    alternates: { canonical: `/shop?fam=${initial}` },
-  };
-}
+export const metadata: Metadata = {
+  title: "Shop Agarbatti Online | Charcoal-Free Incense & Dhoop",
+  description:
+    "Buy hand-rolled charcoal-free agarbatti online. Nag Champa, Mysore Chandan, Gulab Raj, Loban dhoop, pooja kits. COD across India.",
+  alternates: { canonical: "/shop" },
+  openGraph: {
+    title: "Shop ARPAN Agarbatti",
+    description: "Charcoal-free temple incense. 40–50 min burn. Nashik packed.",
+  },
+};
 
 export default async function ShopPage({
   searchParams,
