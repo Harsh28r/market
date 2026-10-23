@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Outfit, Tiro_Devanagari_Hindi } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { JsonLd } from "@/components/json-ld";
 import { Providers } from "@/components/providers";
 import { defaultSiteSeo, orgJsonLd } from "@/lib/seo";
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col bg-paper text-ink">
         <JsonLd data={orgJsonLd(defaultSiteSeo)} />
         <Providers>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );
